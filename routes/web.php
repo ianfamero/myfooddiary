@@ -11,6 +11,8 @@
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::get('/', function () { return view('login'); });
+Route::get('/profile/get-datas', 'ProfileController@getDatas');
+Route::post('/profile/save', 'ProfileController@save');
+Route::get('/{any}', 'RouterController@index')->where('any', '.*');
+
