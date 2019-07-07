@@ -1,7 +1,7 @@
 <template>
   <div>
     <el-row :gutter="20">
-      <el-col :span="8">
+      <el-col :sm="24" :lg="8">
         <el-card>
           <el-form label-position="top" v-loading="isProcessing" element-loading-text="Loading ...">
             <el-form-item label="Date" :error="formError.date" required>
@@ -24,7 +24,7 @@
           </el-form>
         </el-card>
       </el-col>
-      <el-col :span="16">
+      <el-col :sm="24" :lg="16">
         <el-card v-loading="isProcessing" element-loading-text="Loading ...">
           <div class="table-header"><b>BREAKFAST</b></div>
           <el-table :data="food_intake[0]" border stripe>

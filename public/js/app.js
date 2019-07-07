@@ -14214,6 +14214,7 @@ Vue.use(__WEBPACK_IMPORTED_MODULE_3_vue_router__["a" /* default */]);
 
 Vue.component('user-login', __webpack_require__(208));
 Vue.component('top-header', __webpack_require__(214));
+Vue.component('login-header', __webpack_require__(362));
 Vue.component('food-diary', __webpack_require__(220));
 Vue.component('food-list', __webpack_require__(223));
 Vue.component('food-list-form-modal', __webpack_require__(230));
@@ -111316,13 +111317,93 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
-    return {};
+    return {
+      loginFormData: {
+        email: '',
+        password: ''
+      },
+      registerFormData: {
+        full_name: '',
+        email: '',
+        username: '',
+        password: ''
+      },
+      loginFormError: '',
+      registerFormError: ''
+    };
   },
-  created: function created() {
-    document.title = 'Login';
+
+  methods: {
+    submitLoginForm: function submitLoginForm() {
+      var _this = this;
+
+      axios.post("/login", this.loginFormData).then(function (response) {
+        window.location.href = "";
+      }).catch(function (error) {
+        if (error.response.status == 401) {
+          location.reload();
+        } else if (error.response.status == 422) {
+          _this.formError = error.response.data;
+        } else {
+          _this.$root.showMessage('error', error.response.data.message);
+          _this.formError = '';
+        }
+      });
+    },
+    submitRegisterForm: function submitRegisterForm() {
+      axios.post("/register", this.registerFormData).then(function (response) {}).catch(function (error) {});
+    }
   }
 });
 
@@ -111334,20 +111415,301 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _vm._m(0)
+  return _c(
+    "div",
+    { staticClass: "login" },
+    [
+      _c(
+        "el-row",
+        { attrs: { gutter: 20 } },
+        [
+          _c(
+            "el-col",
+            { attrs: { span: 8, offset: 2 } },
+            [
+              _c(
+                "el-card",
+                [
+                  _c("h2", [_vm._v("Login")]),
+                  _vm._v(" "),
+                  _c(
+                    "el-form",
+                    { attrs: { "label-width": "120px" } },
+                    [
+                      _c(
+                        "el-form-item",
+                        {
+                          attrs: {
+                            label: "Email",
+                            error: _vm.loginFormError.email
+                          }
+                        },
+                        [
+                          _c("el-input", {
+                            model: {
+                              value: _vm.loginFormData.email,
+                              callback: function($$v) {
+                                _vm.$set(_vm.loginFormData, "email", $$v)
+                              },
+                              expression: "loginFormData.email"
+                            }
+                          })
+                        ],
+                        1
+                      ),
+                      _vm._v(" "),
+                      _c(
+                        "el-form-item",
+                        {
+                          attrs: {
+                            label: "Password",
+                            error: _vm.loginFormError.password
+                          }
+                        },
+                        [
+                          _c("el-input", {
+                            attrs: { type: "password" },
+                            model: {
+                              value: _vm.loginFormData.password,
+                              callback: function($$v) {
+                                _vm.$set(_vm.loginFormData, "password", $$v)
+                              },
+                              expression: "loginFormData.password"
+                            }
+                          })
+                        ],
+                        1
+                      ),
+                      _vm._v(" "),
+                      _c(
+                        "el-form-item",
+                        [
+                          _c(
+                            "el-button",
+                            {
+                              attrs: { type: "primary" },
+                              on: { click: _vm.submitLoginForm }
+                            },
+                            [_vm._v("Login")]
+                          )
+                        ],
+                        1
+                      )
+                    ],
+                    1
+                  )
+                ],
+                1
+              )
+            ],
+            1
+          ),
+          _vm._v(" "),
+          _c(
+            "el-col",
+            { attrs: { span: 12 } },
+            [
+              _c(
+                "el-card",
+                [
+                  _c("h2", [_vm._v("Register")]),
+                  _vm._v(" "),
+                  _c(
+                    "el-form",
+                    {
+                      directives: [
+                        {
+                          name: "loading",
+                          rawName: "v-loading",
+                          value: _vm.isProcessing,
+                          expression: "isProcessing"
+                        }
+                      ],
+                      attrs: {
+                        "label-position": "top",
+                        "element-loading-text": "Loading ..."
+                      }
+                    },
+                    [
+                      _c(
+                        "el-row",
+                        { attrs: { gutter: 20 } },
+                        [
+                          _c(
+                            "el-col",
+                            { attrs: { span: 12 } },
+                            [
+                              _c(
+                                "el-form-item",
+                                {
+                                  attrs: {
+                                    label: "Full Name",
+                                    required: "",
+                                    error: _vm.registerFormError.full_name
+                                  }
+                                },
+                                [
+                                  _c("el-input", {
+                                    attrs: { type: "text" },
+                                    model: {
+                                      value: _vm.registerFormData.full_name,
+                                      callback: function($$v) {
+                                        _vm.$set(
+                                          _vm.registerFormData,
+                                          "full_name",
+                                          $$v
+                                        )
+                                      },
+                                      expression: "registerFormData.full_name"
+                                    }
+                                  })
+                                ],
+                                1
+                              )
+                            ],
+                            1
+                          ),
+                          _vm._v(" "),
+                          _c(
+                            "el-col",
+                            { attrs: { span: 12 } },
+                            [
+                              _c(
+                                "el-form-item",
+                                {
+                                  attrs: {
+                                    label: "Email",
+                                    required: "",
+                                    error: _vm.registerFormError.email
+                                  }
+                                },
+                                [
+                                  _c("el-input", {
+                                    attrs: { type: "email" },
+                                    model: {
+                                      value: _vm.registerFormData.email,
+                                      callback: function($$v) {
+                                        _vm.$set(
+                                          _vm.registerFormData,
+                                          "email",
+                                          $$v
+                                        )
+                                      },
+                                      expression: "registerFormData.email"
+                                    }
+                                  })
+                                ],
+                                1
+                              )
+                            ],
+                            1
+                          ),
+                          _vm._v(" "),
+                          _c(
+                            "el-col",
+                            { attrs: { span: 12 } },
+                            [
+                              _c(
+                                "el-form-item",
+                                {
+                                  attrs: {
+                                    label: "Username",
+                                    required: "",
+                                    error: _vm.registerFormError.username
+                                  }
+                                },
+                                [
+                                  _c("el-input", {
+                                    attrs: { type: "text" },
+                                    model: {
+                                      value: _vm.registerFormData.username,
+                                      callback: function($$v) {
+                                        _vm.$set(
+                                          _vm.registerFormData,
+                                          "username",
+                                          $$v
+                                        )
+                                      },
+                                      expression: "registerFormData.username"
+                                    }
+                                  })
+                                ],
+                                1
+                              )
+                            ],
+                            1
+                          ),
+                          _vm._v(" "),
+                          _c(
+                            "el-col",
+                            { attrs: { span: 12 } },
+                            [
+                              _c(
+                                "el-form-item",
+                                {
+                                  attrs: {
+                                    label: "Password",
+                                    required: "",
+                                    error: _vm.registerFormError.password
+                                  }
+                                },
+                                [
+                                  _c("el-input", {
+                                    attrs: { type: "password" },
+                                    model: {
+                                      value: _vm.registerFormData.password,
+                                      callback: function($$v) {
+                                        _vm.$set(
+                                          _vm.registerFormData,
+                                          "password",
+                                          $$v
+                                        )
+                                      },
+                                      expression: "registerFormData.password"
+                                    }
+                                  })
+                                ],
+                                1
+                              )
+                            ],
+                            1
+                          ),
+                          _vm._v(" "),
+                          _c(
+                            "el-col",
+                            { attrs: { span: 24 } },
+                            [
+                              _c(
+                                "el-button",
+                                {
+                                  attrs: { type: "primary" },
+                                  on: { click: _vm.submitRegisterForm }
+                                },
+                                [_vm._v("Register")]
+                              )
+                            ],
+                            1
+                          )
+                        ],
+                        1
+                      )
+                    ],
+                    1
+                  )
+                ],
+                1
+              )
+            ],
+            1
+          )
+        ],
+        1
+      )
+    ],
+    1
+  )
 }
-var staticRenderFns = [
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", [
-      _c("h1", [_vm._v("LOGIN")]),
-      _vm._v(" "),
-      _c("a", { attrs: { href: "/food-diary" } }, [_vm._v("FOOD DIARY")])
-    ])
-  }
-]
+var staticRenderFns = []
 render._withStripped = true
 module.exports = { render: render, staticRenderFns: staticRenderFns }
 if (false) {
@@ -111750,7 +112112,7 @@ var render = function() {
         [
           _c(
             "el-col",
-            { attrs: { span: 8 } },
+            { attrs: { sm: 24, lg: 8 } },
             [
               _c(
                 "el-card",
@@ -111901,7 +112263,7 @@ var render = function() {
           _vm._v(" "),
           _c(
             "el-col",
-            { attrs: { span: 16 } },
+            { attrs: { sm: 24, lg: 16 } },
             [
               _c(
                 "el-card",
@@ -113004,6 +113366,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
 
 var URL = '/profile/';
 /* harmony default export */ __webpack_exports__["default"] = ({
@@ -113071,11 +113434,13 @@ var render = function() {
         [
           _c(
             "el-col",
-            { attrs: { span: 16 } },
+            { attrs: { sm: 24, lg: 16 } },
             [
               _c(
                 "el-card",
                 [
+                  _c("h2", [_vm._v(_vm._s(_vm.formData.full_name))]),
+                  _vm._v(" "),
                   _c(
                     "el-form",
                     {
@@ -113327,7 +113692,7 @@ var render = function() {
           _vm._v(" "),
           _c(
             "el-col",
-            { attrs: { span: 8 } },
+            { attrs: { sm: 24, lg: 8 } },
             [
               _c(
                 "el-card",
@@ -130927,6 +131292,94 @@ webpackContext.keys = function webpackContextKeys() {
 webpackContext.resolve = webpackContextResolve;
 module.exports = webpackContext;
 webpackContext.id = 361;
+
+/***/ }),
+/* 362 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var disposed = false
+var normalizeComponent = __webpack_require__(40)
+/* script */
+var __vue_script__ = __webpack_require__(363)
+/* template */
+var __vue_template__ = __webpack_require__(364)
+/* template functional */
+var __vue_template_functional__ = false
+/* styles */
+var __vue_styles__ = null
+/* scopeId */
+var __vue_scopeId__ = null
+/* moduleIdentifier (server only) */
+var __vue_module_identifier__ = null
+var Component = normalizeComponent(
+  __vue_script__,
+  __vue_template__,
+  __vue_template_functional__,
+  __vue_styles__,
+  __vue_scopeId__,
+  __vue_module_identifier__
+)
+Component.options.__file = "resources/assets/js/components/common/LoginHeader.vue"
+
+/* hot reload */
+if (false) {(function () {
+  var hotAPI = require("vue-hot-reload-api")
+  hotAPI.install(require("vue"), false)
+  if (!hotAPI.compatible) return
+  module.hot.accept()
+  if (!module.hot.data) {
+    hotAPI.createRecord("data-v-7da2ea69", Component.options)
+  } else {
+    hotAPI.reload("data-v-7da2ea69", Component.options)
+  }
+  module.hot.dispose(function (data) {
+    disposed = true
+  })
+})()}
+
+module.exports = Component.exports
+
+
+/***/ }),
+/* 363 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+//
+//
+//
+//
+//
+//
+
+/* harmony default export */ __webpack_exports__["default"] = ({
+  data: function data() {
+    return {};
+  },
+
+  methods: {}
+});
+
+/***/ }),
+/* 364 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c("div")
+}
+var staticRenderFns = []
+render._withStripped = true
+module.exports = { render: render, staticRenderFns: staticRenderFns }
+if (false) {
+  module.hot.accept()
+  if (module.hot.data) {
+    require("vue-hot-reload-api")      .rerender("data-v-7da2ea69", module.exports)
+  }
+}
 
 /***/ })
 /******/ ]);

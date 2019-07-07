@@ -1,5 +1,11 @@
 @import url(https://fonts.googleapis.com/css?family=Nunito);body {
+  margin: 0;
   font-family: 'Nunito', sans-serif;
+}
+
+.el-header {
+  padding: 0px !important;
+  background: #0078CC;
 }
 
 .table-header {

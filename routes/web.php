@@ -12,6 +12,7 @@
 */
 
 Route::get('/', function () { return view('login'); });
+Route::post('/register', 'RegisterController@register');
 
 //PROFILE
 Route::get('/profile/get-datas', 'ProfileController@getDatas');

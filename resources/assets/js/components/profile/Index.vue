@@ -1,8 +1,9 @@
 <template>
   <div>
     <el-row :gutter="20">
-      <el-col :span="16">
+      <el-col :sm="24" :lg="16">
         <el-card>
+          <h2>{{ formData.full_name }}</h2>
           <el-form label-position="top" v-loading="isProcessing" element-loading-text="Loading ...">
             <el-row :gutter="20">
               <el-col :span="12">
@@ -43,7 +44,7 @@
           </el-form>
         </el-card>
       </el-col>
-      <el-col :span="8">
+      <el-col :sm="24" :lg="8">
         <el-card v-loading="isProcessing" element-loading-text="Loading ...">
           <h2>Summary</h2>
           <p>BMR: {{ formData.bmr }}</p>

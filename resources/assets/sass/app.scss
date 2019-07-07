@@ -1,7 +1,15 @@
 @import url('https://fonts.googleapis.com/css?family=Nunito');
+
 body {
+  margin: 0;
   font-family: 'Nunito', sans-serif;
 }
+$base-color: #0078CC;
+.el-header {
+  padding: 0px !important;
+  background: $base-color;
+}
+
 .table-header {
   background: #f3f3f3;
   border-top: 1px solid #e3e3e3;
