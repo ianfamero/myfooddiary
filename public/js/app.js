@@ -111626,6 +111626,26 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 var URL = '/food-diary/';
 /* harmony default export */ __webpack_exports__["default"] = ({
@@ -111636,6 +111656,7 @@ var URL = '/food-diary/';
       food_intake: [],
       profile: [],
       total_calories_today: 0,
+      table_index: '',
       formError: '',
       isProcessing: false,
       formData: this.initFormData()
@@ -111644,6 +111665,10 @@ var URL = '/food-diary/';
   created: function created() {
     document.title = 'Food Diary';
     this.getDatas();
+    this.$root.$on('destroy', this.destroy);
+  },
+  beforeDestroy: function beforeDestroy() {
+    this.$root.$off('destroy', this.destroy);
   },
 
   methods: {
@@ -111679,6 +111704,31 @@ var URL = '/food-diary/';
       axios.post(URL + 'add', this.formData).then(function (response) {
         _this2.getDatas();
       }).catch(function (error) {});
+    },
+    toDestroy: function toDestroy(id, code, isMany, tableIndex) {
+      this.table_index = tableIndex;
+      if (this.isProcessing == false) {
+        this.$root.destroyMessage(id, code, isMany);
+      }
+    },
+    destroy: function destroy(id) {
+      var _this3 = this;
+
+      this.isProcessing = true;
+      axios.get(URL + 'destroy/' + id).then(function (response) {
+        _this3.isProcessing = false;
+        _this3.getDatas();
+        var originalIndex = _.findIndex(_this3.food_intake[_this3.table_index], { 'id': id });
+        _this3.food_intake[_this3.table_index].splice(originalIndex, 1);
+        _this3.$root.showMessage('success', response.data);
+      }).catch(function (error) {
+        if (error.response.status == 401) {
+          location.reload();
+        } else {
+          _this3.isProcessing = false;
+          _this3.$root.showMessage('error', error.response.data.message);
+        }
+      });
     }
   }
 });
@@ -111700,7 +111750,7 @@ var render = function() {
         [
           _c(
             "el-col",
-            { attrs: { span: 12 } },
+            { attrs: { span: 8 } },
             [
               _c(
                 "el-card",
@@ -111851,7 +111901,7 @@ var render = function() {
           _vm._v(" "),
           _c(
             "el-col",
-            { attrs: { span: 12 } },
+            { attrs: { span: 16 } },
             [
               _c(
                 "el-card",
@@ -111906,6 +111956,36 @@ var render = function() {
                           label: "Calories",
                           "min-width": "180"
                         }
+                      }),
+                      _vm._v(" "),
+                      _c("el-table-column", {
+                        attrs: { width: "80", fixed: "right" },
+                        scopedSlots: _vm._u([
+                          {
+                            key: "default",
+                            fn: function(scope) {
+                              return [
+                                _c(
+                                  "el-button",
+                                  {
+                                    attrs: { type: "danger" },
+                                    nativeOn: {
+                                      click: function($event) {
+                                        return _vm.toDestroy(
+                                          scope.row.id,
+                                          scope.row.food_list.food,
+                                          false,
+                                          0
+                                        )
+                                      }
+                                    }
+                                  },
+                                  [_c("i", { staticClass: "fa fa-trash-o" })]
+                                )
+                              ]
+                            }
+                          }
+                        ])
                       })
                     ],
                     1
@@ -111950,6 +112030,36 @@ var render = function() {
                           label: "Calories",
                           "min-width": "180"
                         }
+                      }),
+                      _vm._v(" "),
+                      _c("el-table-column", {
+                        attrs: { width: "80", fixed: "right" },
+                        scopedSlots: _vm._u([
+                          {
+                            key: "default",
+                            fn: function(scope) {
+                              return [
+                                _c(
+                                  "el-button",
+                                  {
+                                    attrs: { type: "danger" },
+                                    nativeOn: {
+                                      click: function($event) {
+                                        return _vm.toDestroy(
+                                          scope.row.id,
+                                          scope.row.food_list.food,
+                                          false,
+                                          1
+                                        )
+                                      }
+                                    }
+                                  },
+                                  [_c("i", { staticClass: "fa fa-trash-o" })]
+                                )
+                              ]
+                            }
+                          }
+                        ])
                       })
                     ],
                     1
@@ -111994,6 +112104,36 @@ var render = function() {
                           label: "Calories",
                           "min-width": "180"
                         }
+                      }),
+                      _vm._v(" "),
+                      _c("el-table-column", {
+                        attrs: { width: "80", fixed: "right" },
+                        scopedSlots: _vm._u([
+                          {
+                            key: "default",
+                            fn: function(scope) {
+                              return [
+                                _c(
+                                  "el-button",
+                                  {
+                                    attrs: { type: "danger" },
+                                    nativeOn: {
+                                      click: function($event) {
+                                        return _vm.toDestroy(
+                                          scope.row.id,
+                                          scope.row.food_list.food,
+                                          false,
+                                          2
+                                        )
+                                      }
+                                    }
+                                  },
+                                  [_c("i", { staticClass: "fa fa-trash-o" })]
+                                )
+                              ]
+                            }
+                          }
+                        ])
                       })
                     ],
                     1
@@ -112038,6 +112178,36 @@ var render = function() {
                           label: "Calories",
                           "min-width": "180"
                         }
+                      }),
+                      _vm._v(" "),
+                      _c("el-table-column", {
+                        attrs: { width: "80", fixed: "right" },
+                        scopedSlots: _vm._u([
+                          {
+                            key: "default",
+                            fn: function(scope) {
+                              return [
+                                _c(
+                                  "el-button",
+                                  {
+                                    attrs: { type: "danger" },
+                                    nativeOn: {
+                                      click: function($event) {
+                                        return _vm.toDestroy(
+                                          scope.row.id,
+                                          scope.row.food_list.food,
+                                          false,
+                                          3
+                                        )
+                                      }
+                                    }
+                                  },
+                                  [_c("i", { staticClass: "fa fa-trash-o" })]
+                                )
+                              ]
+                            }
+                          }
+                        ])
                       })
                     ],
                     1

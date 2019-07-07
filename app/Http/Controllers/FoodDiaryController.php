@@ -61,4 +61,13 @@ class FoodDiaryController extends Controller
       return response(['message' => $ex->getMessage()], 500);
     }
   }
+  public function destroy($id) {
+    try {
+      UserFoodIntake::destroy($id);
+      return config('global.success-delete');
+    } 
+    catch (\Exception $ex) {
+
+    }
+  }
 }

@@ -1,7 +1,7 @@
 <template>
   <div>
     <el-row :gutter="20">
-      <el-col :span="12">
+      <el-col :span="8">
         <el-card>
           <el-form label-position="top" v-loading="isProcessing" element-loading-text="Loading ...">
             <el-form-item label="Date" :error="formError.date" required>
@@ -24,31 +24,51 @@
           </el-form>
         </el-card>
       </el-col>
-      <el-col :span="12">
+      <el-col :span="16">
         <el-card v-loading="isProcessing" element-loading-text="Loading ...">
           <div class="table-header"><b>BREAKFAST</b></div>
           <el-table :data="food_intake[0]" border stripe>
             <el-table-column sortable prop="food_list.food" label="Food" min-width="180"></el-table-column>
             <el-table-column sortable prop="food_list.serving_size" label="Serving Size" min-width="180"></el-table-column>
             <el-table-column sortable prop="food_list.calories" label="Calories" min-width="180"></el-table-column>
+            <el-table-column width="80" fixed="right">
+              <template slot-scope="scope">
+                <el-button type="danger" @click.native="toDestroy(scope.row.id, scope.row.food_list.food, false, 0)"><i class="fa fa-trash-o"></i></el-button>
+              </template>
+            </el-table-column>
           </el-table>
           <div class="table-header"><b>LUNCH</b></div>
           <el-table :data="food_intake[1]" border stripe>
             <el-table-column sortable prop="food_list.food" label="Food" min-width="180"></el-table-column>
             <el-table-column sortable prop="food_list.serving_size" label="Serving Size" min-width="180"></el-table-column>
             <el-table-column sortable prop="food_list.calories" label="Calories" min-width="180"></el-table-column>
+            <el-table-column width="80" fixed="right">
+              <template slot-scope="scope">
+                <el-button type="danger" @click.native="toDestroy(scope.row.id, scope.row.food_list.food, false, 1)"><i class="fa fa-trash-o"></i></el-button>
+              </template>
+            </el-table-column>
           </el-table>
           <div class="table-header"><b>DINNER</b></div>
           <el-table :data="food_intake[2]" border stripe>
             <el-table-column sortable prop="food_list.food" label="Food" min-width="180"></el-table-column>
             <el-table-column sortable prop="food_list.serving_size" label="Serving Size" min-width="180"></el-table-column>
             <el-table-column sortable prop="food_list.calories" label="Calories" min-width="180"></el-table-column>
+            <el-table-column width="80" fixed="right">
+              <template slot-scope="scope">
+                <el-button type="danger" @click.native="toDestroy(scope.row.id, scope.row.food_list.food, false, 2)"><i class="fa fa-trash-o"></i></el-button>
+              </template>
+            </el-table-column>
           </el-table>
           <div class="table-header"><b>SNACK</b></div>
           <el-table :data="food_intake[3]" border stripe>
             <el-table-column sortable prop="food_list.food" label="Food" min-width="180"></el-table-column>
             <el-table-column sortable prop="food_list.serving_size" label="Serving Size" min-width="180"></el-table-column>
             <el-table-column sortable prop="food_list.calories" label="Calories" min-width="180"></el-table-column>
+            <el-table-column width="80" fixed="right">
+              <template slot-scope="scope">
+                <el-button type="danger" @click.native="toDestroy(scope.row.id, scope.row.food_list.food, false, 3)"><i class="fa fa-trash-o"></i></el-button>
+              </template>
+            </el-table-column>
           </el-table>
 
           <p>Maintain Weight: <b>{{ total_calories_today }} / {{ profile[0].maintain_weight }}</b></p>
@@ -70,6 +90,7 @@
         food_intake: [],
         profile: [],
         total_calories_today: 0,
+        table_index: '',
         formError: '',
         isProcessing: false,
         formData: this.initFormData(),
@@ -78,6 +99,10 @@
     created() {
       document.title = 'Food Diary';
       this.getDatas();
+      this.$root.$on('destroy', this.destroy);
+    },
+    beforeDestroy() {
+      this.$root.$off('destroy', this.destroy);
     },
     methods: {
       initFormData: function() {
@@ -112,7 +137,31 @@
         }).catch(error => {
 
         });
-      }
+      },
+      toDestroy: function (id, code, isMany, tableIndex) {
+        this.table_index = tableIndex;
+        if (this.isProcessing == false) {
+          this.$root.destroyMessage(id, code, isMany);
+        }
+      },
+      destroy: function (id) {
+        this.isProcessing = true;
+        axios.get(URL + 'destroy/' + id)
+        .then (response => {
+          this.isProcessing = false;
+          this.getDatas();
+          let originalIndex = _.findIndex(this.food_intake[this.table_index], { 'id' : id});
+          this.food_intake[this.table_index].splice(originalIndex, 1);
+          this.$root.showMessage('success', response.data);
+        }) .catch (error => {
+          if (error.response.status == 401) {
+            location.reload();
+          } else {
+            this.isProcessing = false;
+            this.$root.showMessage('error', error.response.data.message);
+          }
+        });
+      },
     }
   }
 

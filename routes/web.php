@@ -27,6 +27,7 @@ Route::post('/food-list/destroy-selected', 'FoodListController@destroySelected')
 //FOOD DIARY
 Route::post('/food-diary/get-datas', 'FoodDiaryController@getDatas');
 Route::post('/food-diary/add', 'FoodDiaryController@add');
+Route::get('/food-diary/destroy/{id}', 'FoodDiaryController@destroy');
 
 Route::get('/{any}', 'RouterController@index')->where('any', '.*');
 
