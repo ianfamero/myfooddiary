@@ -22,7 +22,8 @@ class Profile extends Authenticatable
         'activity_id',
         'maintain_weight',
         'lose_weight',
-        'lose_weight_fast'
+        'lose_weight_fast',
+        'bmr'
     ];
 
     protected $hidden = [

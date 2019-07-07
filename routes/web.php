@@ -12,7 +12,21 @@
 */
 
 Route::get('/', function () { return view('login'); });
+
+//PROFILE
 Route::get('/profile/get-datas', 'ProfileController@getDatas');
 Route::post('/profile/save', 'ProfileController@save');
+
+//FOOD LIST
+Route::get('/food-list/get-datas', 'FoodListController@getDatas');
+Route::post('/food-list/new', 'FoodListController@store');
+Route::post('/food-list/edit/{id}', 'FoodListController@update');
+Route::get('/food-list/destroy/{id}', 'FoodListController@destroy');
+Route::post('/food-list/destroy-selected', 'FoodListController@destroySelected');
+
+//FOOD DIARY
+Route::post('/food-diary/get-datas', 'FoodDiaryController@getDatas');
+Route::post('/food-diary/add', 'FoodDiaryController@add');
+
 Route::get('/{any}', 'RouterController@index')->where('any', '.*');
 

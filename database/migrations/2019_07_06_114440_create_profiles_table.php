@@ -23,6 +23,7 @@ class CreateProfilesTable extends Migration
             $table->integer('maintain_weight')->default(0);
             $table->integer('lose_weight')->default(0);
             $table->integer('lose_weight_fast')->default(0);
+            $table->integer('bmr')->default(0);
             $table->timestamps();
 
             $table->foreign('gender_id')
