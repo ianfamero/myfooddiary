@@ -10,7 +10,7 @@
     </el-menu>
   </div>
 </template>
-</div>
+
 <script>
   export default {
     data() {

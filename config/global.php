@@ -5,7 +5,8 @@ return [
     | Alert Messages
     |--------------------------------------------------------------------------
     */
-
+    'success-register' => 'Registration successful. You may now login with your account.',
+    'failed-register' => 'Registration failed. Please try again.',
     'success-store' => 'is saved.',
     'failed-store' => 'Saving failed! Please try again.',
     'success-update' => 'is updated.',
