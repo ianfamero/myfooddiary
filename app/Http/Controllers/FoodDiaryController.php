@@ -7,42 +7,52 @@ use App\MealType;
 use App\FoodList;
 use App\UserFoodIntake;
 use App\Profile;
+use App\User;
 use DB;
+use Auth;
 
 class FoodDiaryController extends Controller
 {
   public function getDatas(Request $request) {
     try {
+      $user = Auth::user();
       $data = $request->all();
       $meal_types = MealType::all();
-      $food_list = FoodList::all();
+      $food_list = FoodList::where('profile_id', $user['profile_id'])->get();
 
+     
+      
       $breakfast = UserFoodIntake::with('mealType','foodList')
       ->where('date', $data['date'])
       ->where('meal_type_id', 1)
+      ->where('profile_id', $user['profile_id'])
       ->get();
 
       $lunch = UserFoodIntake::with('mealType','foodList')
       ->where('date', $data['date'])
       ->where('meal_type_id', 2)
+      ->where('profile_id', $user['profile_id'])
       ->get();
 
       $dinner = UserFoodIntake::with('mealType','foodList')
       ->where('date', $data['date'])
       ->where('meal_type_id', 3)
+      ->where('profile_id', $user['profile_id'])
       ->get();
 
       $snack = UserFoodIntake::with('mealType','foodList')
       ->where('date', $data['date'])
       ->where('meal_type_id', 4)
+      ->where('profile_id', $user['profile_id'])
       ->get();
 
       $total_calories_today = DB::table('user_food_intakes as a')
       ->leftJoin('food_lists as b', 'a.food_list_id', 'b.id')
       ->where('date', $data['date'])
+      ->where('a.profile_id', $user['profile_id'])
       ->sum('calories');
 
-      $profile = Profile::where('id', 1)->get();
+      $profile = Profile::where('id', $user['profile_id'])->get();
 
       $food_intake = array($breakfast, $lunch, $dinner, $snack);
       return compact('meal_types', 'food_list', 'food_intake', 'total_calories_today', 'profile');   
@@ -53,7 +63,9 @@ class FoodDiaryController extends Controller
   }
   public function add(Request $request) {
     try {
+      $user = Auth::user();
       $inputs = $request->all();
+      $inputs['profile_id'] = $user['profile_id'];
       $user_food_intake = UserFoodIntake::create($inputs);
       return response(['message' => config('global.success-store'), 'user_food_intake' => $user_food_intake], 200);
     }

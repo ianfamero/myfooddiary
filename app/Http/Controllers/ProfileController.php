@@ -6,14 +6,21 @@ use Illuminate\Http\Request;
 use App\Gender;
 use App\Activity;
 use App\Profile;
+use App\User;
+use Auth;
+
+use App\Http\Requests\ProfileRequest;
 
 class ProfileController extends Controller
 {
   public function getDatas() {
     try {
+      $user = Auth::user();
       $genders = Gender::all();
       $activity = Activity::all();
-      $profile = Profile::where('id', 1)->get();
+      $profile = User::with('profile')->where('profile_id', $user['profile_id'])->get();
+      // $profile = Profile::where('id', $user['profile_id'])->get();
+
       return compact('genders', 'activity', 'profile');
     }
     catch(\Exception $ex) {
@@ -21,9 +28,10 @@ class ProfileController extends Controller
     }
   }
 
-  public function save(Request $request) {
+  public function save(ProfileRequest $request) {
     try {
       $inputs = $request->all();
+
       if($inputs['gender_id'] == 1) {
         $bmr = 10 * (int)$inputs['weight'] + 6.25 * (int)$inputs['height'] - 5 * (int)$inputs['age'] + 5;
       } else {
@@ -54,6 +62,7 @@ class ProfileController extends Controller
       $inputs['lose_weight_fast'] = $bmr - 990;
 
       Profile::find($inputs['id'])->update($inputs);
+      return response(['message' => 'Profile saved successfully.'], 200);
     }
     catch(\Exception $ex) {
       return response(['message' => $ex->getMessage()], 500);

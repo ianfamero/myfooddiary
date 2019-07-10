@@ -1,13 +1,13 @@
 <template>
   <div class="login">
     <el-row :gutter="20">
-      <el-col :span="11" :offset="3">
+      <el-col :sm="{span:14}" :md="{span:11, offset:3}" style="margin-bottom: 20px">
         <el-card>
           <h2>My Food Diary</h2>
           <p>My Food Diary helps you monitor your daily calorie intake for a healthy weight-loss journey.</p>
         </el-card>
       </el-col>
-      <el-col :span="7">
+      <el-col  :sm="{span:10}" :md="{span:7}">
         <el-card>
           <el-tabs type="card">
             <el-tab-pane label="Login">
@@ -37,7 +37,11 @@
                 <el-form-item label="Password" required :error="registerFormError.password">
                   <el-input type="password" v-model="registerFormData.password"></el-input>
                 </el-form-item>
-                <el-button type="primary" @click="submitRegisterForm">Register</el-button>
+                <el-form-item>
+                  <el-checkbox v-model="iAccept">I accept the <a href="#">Terms of Service</a></el-checkbox>
+                </el-form-item>
+                <vue-recaptcha sitekey="6Lcq66wUAAAAAPxRNPGh25Y4Dx8B4BU-FIc0VjUt" @verify="onCaptchaVerified"></vue-recaptcha><br>
+                <el-button type="primary" @click="submitRegisterForm" :disabled="btnDisabled">Register</el-button>
               </el-form>
             </el-tab-pane>
           </el-tabs>
@@ -65,6 +69,8 @@
         loginFormError: '',
         registerFormError: '',
         isProcessing: false,
+        btnDisabled: true,
+        iAccept: false,
       }
     },
     created() {
@@ -108,7 +114,10 @@
           }
           this.isProcessing = false;
         })
-      }
+      },
+      onCaptchaVerified: function () {
+      this.btnDisabled = false;
+    },
     }
   }
 </script>

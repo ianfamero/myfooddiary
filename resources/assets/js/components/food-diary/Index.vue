@@ -1,7 +1,7 @@
 <template>
   <div>
     <el-row :gutter="20">
-      <el-col :sm="24" :lg="8">
+      <el-col :xs="24" :sm="8" style="margin-bottom: 20px">
         <el-card>
           <el-form label-position="top" v-loading="isProcessing" element-loading-text="Loading ...">
             <el-form-item label="Date" :error="formError.date" required>
@@ -22,9 +22,14 @@
           </el-form-item>
           <el-button type="primary" @click="submitForm"><i class="fa fa-plus"></i> Add</el-button>
           </el-form>
+        </el-card><br>
+        <el-card>
+          <p>Maintain Weight: <b>{{ total_calories_today }} / {{ profile[0].maintain_weight }}</b></p>
+          <p>Lose Weight: <b>{{ total_calories_today }} / {{ profile[0].lose_weight }}</b></p>
+          <p>Lose Weight Fast: <b>{{ total_calories_today }} / {{ profile[0].lose_weight_fast }}</b></p>
         </el-card>
       </el-col>
-      <el-col :sm="24" :lg="16">
+      <el-col :xs="24" :sm="16">
         <el-card v-loading="isProcessing" element-loading-text="Loading ...">
           <div class="table-header"><b>BREAKFAST</b></div>
           <el-table :data="food_intake[0]" border stripe>
@@ -70,10 +75,6 @@
               </template>
             </el-table-column>
           </el-table>
-
-          <p>Maintain Weight: <b>{{ total_calories_today }} / {{ profile[0].maintain_weight }}</b></p>
-          <p>Lose Weight: <b>{{ total_calories_today }} / {{ profile[0].lose_weight }}</b></p>
-          <p>Lose Weight Fast: <b>{{ total_calories_today }} / {{ profile[0].lose_weight_fast }}</b></p>
         </el-card>
       </el-col>
     </el-row>
@@ -110,7 +111,7 @@
           date: this.getDate(),
           meal_type_id: '',
           food_list_id: '',
-          profile_id: 1,
+          profile_id: '',
         }
       },
       getDate: function() {

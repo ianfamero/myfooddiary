@@ -1,13 +1,13 @@
 <template>
   <div>
     <el-row :gutter="20">
-      <el-col :sm="24" :lg="16">
+      <el-col :xs="24" :sm="16" style="margin-bottom: 20px">
         <el-card>
-          <h2>{{ formData.full_name }}</h2>
+          <h2>{{ userData.name }} - Profile</h2>
           <el-form label-position="top" v-loading="isProcessing" element-loading-text="Loading ...">
             <el-row :gutter="20">
               <el-col :span="12">
-                <el-form-item label="Gender" required :error="formError.gender">
+                <el-form-item label="Gender" required :error="formError.gender_id">
                   <el-select v-model="formData.gender_id" placeholder="Select" filterable style="width: 100%">
                     <el-option v-for="gender in genders" :key="gender.id" :label="gender.gender" :value="gender.id">
                     </el-option>
@@ -30,7 +30,7 @@
                 </el-form-item>
               </el-col>
               <el-col :span="24">
-                <el-form-item label="Activity" required :error="formError.activity">
+                <el-form-item label="Activity" required :error="formError.activity_id">
                   <el-select v-model="formData.activity_id" placeholder="Select" filterable style="width: 100%">
                     <el-option v-for="act in activity" :key="act.id" :label="act.activity" :value="act.id">
                     </el-option>
@@ -44,13 +44,13 @@
           </el-form>
         </el-card>
       </el-col>
-      <el-col :sm="24" :lg="8">
+      <el-col :xs="24" :sm="8">
         <el-card v-loading="isProcessing" element-loading-text="Loading ...">
           <h2>Summary</h2>
-          <p>BMR: {{ formData.bmr }}</p>
-          <p>Maintain Weight: {{ formData.maintain_weight }}</p>
-          <p>Lose Weight: {{ formData.lose_weight }}</p>
-          <p>Lose Weight Fast: {{ formData.lose_weight_fast }}</p>
+          <p>BMR: <b>{{ formData.bmr }}</b></p>
+          <p>Maintain Weight: <b>{{ formData.maintain_weight }}</b></p>
+          <p>Lose Weight: <b>{{ formData.lose_weight }}</b></p>
+          <p>Lose Weight Fast: <b>{{ formData.lose_weight_fast }}</b></p>
         </el-card>
       </el-col>
     </el-row>
@@ -65,6 +65,7 @@
         genders: [],
         activity: [],
         formData: this.initFormData(),
+        userData: [],
         formError: '',
         isProcessing: false,
       }
@@ -90,17 +91,31 @@
           this.isProcessing = false;
           this.genders = response.data.genders;
           this.activity = response.data.activity;
-          this.formData = response.data.profile[0];
+          this.formData = response.data.profile[0].profile;
+          this.userData = response.data.profile[0];
         }).catch(error => {
           this.isProcessing = false;
         });
       },
       submitForm: function() {
+        this.isProcessing = true;
         axios.post(URL + 'save', this.formData)
         .then(response => {
           this.getDatas();
+          this.isProcessing = false;
+          this.$root.showMessage('success', response.data.message);
+          this.formError = '';
         }).catch(error => {
-
+          if (error.response.status == 401) {
+            location.reload();
+          }
+          else if (error.response.status == 422) {
+            this.formError = error.response.data;
+          } else {
+            this.$root.showMessage('error', error.response.data.message);
+            this.formError = '';
+          }
+          this.isProcessing = false;
         });
       }
     }

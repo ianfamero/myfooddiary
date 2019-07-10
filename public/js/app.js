@@ -39932,6 +39932,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_element_ui_lib_theme_chalk_index_css___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2_element_ui_lib_theme_chalk_index_css__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_vue_router__ = __webpack_require__(211);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__router__ = __webpack_require__(333);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5_vue_recaptcha__ = __webpack_require__(353);
 
 /**
  * First we will load all of this project's JavaScript dependencies which
@@ -39952,6 +39953,7 @@ __webpack_require__(31);
 
 
 
+
 Vue.use(__WEBPACK_IMPORTED_MODULE_0_element_ui___default.a, { size: 'small', locale: __WEBPACK_IMPORTED_MODULE_1_element_ui_lib_locale_lang_en___default.a });
 Vue.use(__WEBPACK_IMPORTED_MODULE_3_vue_router__["a" /* default */]);
 /**
@@ -39959,6 +39961,7 @@ Vue.use(__WEBPACK_IMPORTED_MODULE_3_vue_router__["a" /* default */]);
  * the page. Then, you may begin adding components to this application
  * or customize the JavaScript scaffolding to fit your unique needs.
  */
+Vue.component('vue-recaptcha', __WEBPACK_IMPORTED_MODULE_5_vue_recaptcha__["a" /* default */]);
 
 Vue.component('user-login', __webpack_require__(212));
 Vue.component('top-header', __webpack_require__(342));
@@ -40012,6 +40015,9 @@ var app = new Vue({
     },
     moveTo: function moveTo(link) {
       __WEBPACK_IMPORTED_MODULE_4__router__["a" /* default */].push(link);
+    },
+    linkTo: function linkTo(link) {
+      window.open(link, "_self");
     }
   }
 });
@@ -128695,6 +128701,10 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
@@ -128712,7 +128722,9 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
       },
       loginFormError: '',
       registerFormError: '',
-      isProcessing: false
+      isProcessing: false,
+      btnDisabled: true,
+      iAccept: false
     };
   },
   created: function created() {
@@ -128757,6 +128769,9 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         }
         _this2.isProcessing = false;
       });
+    },
+    onCaptchaVerified: function onCaptchaVerified() {
+      this.btnDisabled = false;
     }
   }
 });
@@ -128779,7 +128794,10 @@ var render = function() {
         [
           _c(
             "el-col",
-            { attrs: { span: 11, offset: 3 } },
+            {
+              staticStyle: { "margin-bottom": "20px" },
+              attrs: { sm: { span: 14 }, md: { span: 11, offset: 3 } }
+            },
             [
               _c("el-card", [
                 _c("h2", [_vm._v("My Food Diary")]),
@@ -128796,7 +128814,7 @@ var render = function() {
           _vm._v(" "),
           _c(
             "el-col",
-            { attrs: { span: 7 } },
+            { attrs: { sm: { span: 10 }, md: { span: 7 } } },
             [
               _c(
                 "el-card",
@@ -129034,9 +129052,46 @@ var render = function() {
                               ),
                               _vm._v(" "),
                               _c(
+                                "el-form-item",
+                                [
+                                  _c(
+                                    "el-checkbox",
+                                    {
+                                      model: {
+                                        value: _vm.iAccept,
+                                        callback: function($$v) {
+                                          _vm.iAccept = $$v
+                                        },
+                                        expression: "iAccept"
+                                      }
+                                    },
+                                    [
+                                      _vm._v("I accept the "),
+                                      _c("a", { attrs: { href: "#" } }, [
+                                        _vm._v("Terms of Service")
+                                      ])
+                                    ]
+                                  )
+                                ],
+                                1
+                              ),
+                              _vm._v(" "),
+                              _c("vue-recaptcha", {
+                                attrs: {
+                                  sitekey:
+                                    "6Lcq66wUAAAAAPxRNPGh25Y4Dx8B4BU-FIc0VjUt"
+                                },
+                                on: { verify: _vm.onCaptchaVerified }
+                              }),
+                              _c("br"),
+                              _vm._v(" "),
+                              _c(
                                 "el-button",
                                 {
-                                  attrs: { type: "primary" },
+                                  attrs: {
+                                    type: "primary",
+                                    disabled: _vm.btnDisabled
+                                  },
                                   on: { click: _vm.submitRegisterForm }
                                 },
                                 [_vm._v("Register")]
@@ -129161,6 +129216,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
 
 var URL = '/food-diary/';
 /* harmony default export */ __webpack_exports__["default"] = ({
@@ -129192,7 +129248,7 @@ var URL = '/food-diary/';
         date: this.getDate(),
         meal_type_id: '',
         food_list_id: '',
-        profile_id: 1
+        profile_id: ''
       };
     },
     getDate: function getDate() {
@@ -129265,7 +129321,10 @@ var render = function() {
         [
           _c(
             "el-col",
-            { attrs: { sm: 24, lg: 8 } },
+            {
+              staticStyle: { "margin-bottom": "20px" },
+              attrs: { xs: 24, sm: 8 }
+            },
             [
               _c(
                 "el-card",
@@ -129409,14 +129468,50 @@ var render = function() {
                   )
                 ],
                 1
-              )
+              ),
+              _c("br"),
+              _vm._v(" "),
+              _c("el-card", [
+                _c("p", [
+                  _vm._v("Maintain Weight: "),
+                  _c("b", [
+                    _vm._v(
+                      _vm._s(_vm.total_calories_today) +
+                        " / " +
+                        _vm._s(_vm.profile[0].maintain_weight)
+                    )
+                  ])
+                ]),
+                _vm._v(" "),
+                _c("p", [
+                  _vm._v("Lose Weight: "),
+                  _c("b", [
+                    _vm._v(
+                      _vm._s(_vm.total_calories_today) +
+                        " / " +
+                        _vm._s(_vm.profile[0].lose_weight)
+                    )
+                  ])
+                ]),
+                _vm._v(" "),
+                _c("p", [
+                  _vm._v("Lose Weight Fast: "),
+                  _c("b", [
+                    _vm._v(
+                      _vm._s(_vm.total_calories_today) +
+                        " / " +
+                        _vm._s(_vm.profile[0].lose_weight_fast)
+                    )
+                  ])
+                ])
+              ])
             ],
             1
           ),
           _vm._v(" "),
           _c(
             "el-col",
-            { attrs: { sm: 24, lg: 16 } },
+            { attrs: { xs: 24, sm: 16 } },
             [
               _c(
                 "el-card",
@@ -129726,40 +129821,7 @@ var render = function() {
                       })
                     ],
                     1
-                  ),
-                  _vm._v(" "),
-                  _c("p", [
-                    _vm._v("Maintain Weight: "),
-                    _c("b", [
-                      _vm._v(
-                        _vm._s(_vm.total_calories_today) +
-                          " / " +
-                          _vm._s(_vm.profile[0].maintain_weight)
-                      )
-                    ])
-                  ]),
-                  _vm._v(" "),
-                  _c("p", [
-                    _vm._v("Lose Weight: "),
-                    _c("b", [
-                      _vm._v(
-                        _vm._s(_vm.total_calories_today) +
-                          " / " +
-                          _vm._s(_vm.profile[0].lose_weight)
-                      )
-                    ])
-                  ]),
-                  _vm._v(" "),
-                  _c("p", [
-                    _vm._v("Lose Weight Fast: "),
-                    _c("b", [
-                      _vm._v(
-                        _vm._s(_vm.total_calories_today) +
-                          " / " +
-                          _vm._s(_vm.profile[0].lose_weight_fast)
-                      )
-                    ])
-                  ])
+                  )
                 ],
                 1
               )
@@ -130055,7 +130117,7 @@ var render = function() {
                         [
                           _c(
                             "el-col",
-                            { attrs: { sm: 14 } },
+                            { attrs: { xs: 6, sm: 14 } },
                             [
                               _c(
                                 "el-tooltip",
@@ -130093,7 +130155,7 @@ var render = function() {
                           _vm._v(" "),
                           _c(
                             "el-col",
-                            { attrs: { sm: 10 } },
+                            { attrs: { xs: 18, sm: 10 } },
                             [
                               _c(
                                 "el-input",
@@ -130112,7 +130174,7 @@ var render = function() {
                                   _c(
                                     "el-select",
                                     {
-                                      staticStyle: { width: "150px" },
+                                      staticStyle: { width: "100px" },
                                       attrs: {
                                         slot: "prepend",
                                         placeholder: "Select",
@@ -130434,6 +130496,7 @@ var URL = '/profile/';
       genders: [],
       activity: [],
       formData: this.initFormData(),
+      userData: [],
       formError: '',
       isProcessing: false
     };
@@ -130461,7 +130524,8 @@ var URL = '/profile/';
         _this.isProcessing = false;
         _this.genders = response.data.genders;
         _this.activity = response.data.activity;
-        _this.formData = response.data.profile[0];
+        _this.formData = response.data.profile[0].profile;
+        _this.userData = response.data.profile[0];
       }).catch(function (error) {
         _this.isProcessing = false;
       });
@@ -130469,9 +130533,23 @@ var URL = '/profile/';
     submitForm: function submitForm() {
       var _this2 = this;
 
+      this.isProcessing = true;
       axios.post(URL + 'save', this.formData).then(function (response) {
         _this2.getDatas();
-      }).catch(function (error) {});
+        _this2.isProcessing = false;
+        _this2.$root.showMessage('success', response.data.message);
+        _this2.formError = '';
+      }).catch(function (error) {
+        if (error.response.status == 401) {
+          location.reload();
+        } else if (error.response.status == 422) {
+          _this2.formError = error.response.data;
+        } else {
+          _this2.$root.showMessage('error', error.response.data.message);
+          _this2.formError = '';
+        }
+        _this2.isProcessing = false;
+      });
     }
   }
 });
@@ -130493,12 +130571,15 @@ var render = function() {
         [
           _c(
             "el-col",
-            { attrs: { sm: 24, lg: 16 } },
+            {
+              staticStyle: { "margin-bottom": "20px" },
+              attrs: { xs: 24, sm: 16 }
+            },
             [
               _c(
                 "el-card",
                 [
-                  _c("h2", [_vm._v(_vm._s(_vm.formData.full_name))]),
+                  _c("h2", [_vm._v(_vm._s(_vm.userData.name) + " - Profile")]),
                   _vm._v(" "),
                   _c(
                     "el-form",
@@ -130531,7 +130612,7 @@ var render = function() {
                                   attrs: {
                                     label: "Gender",
                                     required: "",
-                                    error: _vm.formError.gender
+                                    error: _vm.formError.gender_id
                                   }
                                 },
                                 [
@@ -130676,7 +130757,7 @@ var render = function() {
                                   attrs: {
                                     label: "Activity",
                                     required: "",
-                                    error: _vm.formError.activity
+                                    error: _vm.formError.activity_id
                                   }
                                 },
                                 [
@@ -130751,7 +130832,7 @@ var render = function() {
           _vm._v(" "),
           _c(
             "el-col",
-            { attrs: { sm: 24, lg: 8 } },
+            { attrs: { xs: 24, sm: 8 } },
             [
               _c(
                 "el-card",
@@ -130769,23 +130850,24 @@ var render = function() {
                 [
                   _c("h2", [_vm._v("Summary")]),
                   _vm._v(" "),
-                  _c("p", [_vm._v("BMR: " + _vm._s(_vm.formData.bmr))]),
-                  _vm._v(" "),
                   _c("p", [
-                    _vm._v(
-                      "Maintain Weight: " + _vm._s(_vm.formData.maintain_weight)
-                    )
+                    _vm._v("BMR: "),
+                    _c("b", [_vm._v(_vm._s(_vm.formData.bmr))])
                   ]),
                   _vm._v(" "),
                   _c("p", [
-                    _vm._v("Lose Weight: " + _vm._s(_vm.formData.lose_weight))
+                    _vm._v("Maintain Weight: "),
+                    _c("b", [_vm._v(_vm._s(_vm.formData.maintain_weight))])
                   ]),
                   _vm._v(" "),
                   _c("p", [
-                    _vm._v(
-                      "Lose Weight Fast: " +
-                        _vm._s(_vm.formData.lose_weight_fast)
-                    )
+                    _vm._v("Lose Weight: "),
+                    _c("b", [_vm._v(_vm._s(_vm.formData.lose_weight))])
+                  ]),
+                  _vm._v(" "),
+                  _c("p", [
+                    _vm._v("Lose Weight Fast: "),
+                    _c("b", [_vm._v(_vm._s(_vm.formData.lose_weight_fast))])
                   ])
                 ]
               )
@@ -130876,13 +130958,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 
-/* harmony default export */ __webpack_exports__["default"] = ({
-  data: function data() {
-    return {};
-  },
-
-  methods: {}
-});
+/* harmony default export */ __webpack_exports__["default"] = ({});
 
 /***/ }),
 /* 344 */
@@ -130897,10 +130973,7 @@ var render = function() {
     [
       _c(
         "el-menu",
-        {
-          staticClass: "el-menu",
-          attrs: { "default-active": "1", mode: "horizontal" }
-        },
+        { staticClass: "el-menu", attrs: { mode: "horizontal" } },
         [
           _c(
             "el-menu-item",
@@ -130939,6 +131012,20 @@ var render = function() {
               }
             },
             [_vm._v("PROFILE")]
+          ),
+          _vm._v(" "),
+          _c(
+            "el-menu-item",
+            {
+              staticStyle: { background: "#FBCFD0", color: "red" },
+              attrs: { index: "4" },
+              on: {
+                click: function($event) {
+                  return _vm.$root.linkTo("/logout")
+                }
+              }
+            },
+            [_vm._v("LOGOUT")]
           )
         ],
         1
@@ -131144,7 +131231,8 @@ var URL = '/food-list/';
       return {
         food: '',
         serving_size: '',
-        calories: ''
+        calories: '',
+        profile_id: ''
       };
     },
     submitForm: function submitForm() {
@@ -131385,6 +131473,207 @@ if (false) {
 /***/ (function(module, exports) {
 
 // removed by extract-text-webpack-plugin
+
+/***/ }),
+/* 352 */,
+/* 353 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+function _extends() {
+  _extends = Object.assign || function (target) {
+    for (var i = 1; i < arguments.length; i++) {
+      var source = arguments[i];
+
+      for (var key in source) {
+        if (Object.prototype.hasOwnProperty.call(source, key)) {
+          target[key] = source[key];
+        }
+      }
+    }
+
+    return target;
+  };
+
+  return _extends.apply(this, arguments);
+}
+
+var defer = function defer() {
+  var state = false; // Resolved or not
+
+  var callbacks = [];
+
+  var resolve = function resolve(val) {
+    if (state) {
+      return;
+    }
+
+    state = true;
+
+    for (var i = 0, len = callbacks.length; i < len; i++) {
+      callbacks[i](val);
+    }
+  };
+
+  var then = function then(cb) {
+    if (!state) {
+      callbacks.push(cb);
+      return;
+    }
+
+    cb();
+  };
+
+  var deferred = {
+    resolved: function resolved() {
+      return state;
+    },
+    resolve: resolve,
+    promise: {
+      then: then
+    }
+  };
+  return deferred;
+};
+
+function createRecaptcha() {
+  var deferred = defer();
+  return {
+    notify: function notify() {
+      deferred.resolve();
+    },
+    wait: function wait() {
+      return deferred.promise;
+    },
+    render: function render(ele, options, cb) {
+      this.wait().then(function () {
+        cb(window.grecaptcha.render(ele, options));
+      });
+    },
+    reset: function reset(widgetId) {
+      if (typeof widgetId === 'undefined') {
+        return;
+      }
+
+      this.assertLoaded();
+      this.wait().then(function () {
+        return window.grecaptcha.reset(widgetId);
+      });
+    },
+    execute: function execute(widgetId) {
+      if (typeof widgetId === 'undefined') {
+        return;
+      }
+
+      this.assertLoaded();
+      this.wait().then(function () {
+        return window.grecaptcha.execute(widgetId);
+      });
+    },
+    checkRecaptchaLoad: function checkRecaptchaLoad() {
+      if (window.hasOwnProperty('grecaptcha') && window.grecaptcha.hasOwnProperty('render')) {
+        this.notify();
+      }
+    },
+    assertLoaded: function assertLoaded() {
+      if (!deferred.resolved()) {
+        throw new Error('ReCAPTCHA has not been loaded');
+      }
+    }
+  };
+}
+var recaptcha = createRecaptcha();
+
+if (typeof window !== 'undefined') {
+  window.vueRecaptchaApiLoaded = recaptcha.notify;
+}
+
+var VueRecaptcha = {
+  name: 'VueRecaptcha',
+  props: {
+    sitekey: {
+      type: String,
+      required: true
+    },
+    theme: {
+      type: String
+    },
+    badge: {
+      type: String
+    },
+    type: {
+      type: String
+    },
+    size: {
+      type: String
+    },
+    tabindex: {
+      type: String
+    },
+    loadRecaptchaScript: {
+      type: Boolean,
+      "default": false
+    },
+    recaptchaScriptId: {
+      type: String,
+      "default": '__RECAPTCHA_SCRIPT'
+    },
+    recaptchaHost: {
+      type: String,
+      "default": 'www.google.com'
+    }
+  },
+  beforeMount: function beforeMount() {
+    if (this.loadRecaptchaScript) {
+      if (!document.getElementById(this.recaptchaScriptId)) {
+        // Note: vueRecaptchaApiLoaded load callback name is per the latest documentation
+        var script = document.createElement('script');
+        script.id = this.recaptchaScriptId;
+        script.src = "https://" + this.recaptchaHost + "/recaptcha/api.js?onload=vueRecaptchaApiLoaded&render=explicit";
+        script.async = true;
+        script.defer = true;
+        document.head.appendChild(script);
+      }
+    }
+  },
+  mounted: function mounted() {
+    var _this = this;
+
+    recaptcha.checkRecaptchaLoad();
+
+    var opts = _extends({}, this.$props, {
+      callback: this.emitVerify,
+      'expired-callback': this.emitExpired
+    });
+
+    var container = this.$slots["default"] ? this.$el.children[0] : this.$el;
+    recaptcha.render(container, opts, function (id) {
+      _this.$widgetId = id;
+
+      _this.$emit('render', id);
+    });
+  },
+  methods: {
+    reset: function reset() {
+      recaptcha.reset(this.$widgetId);
+    },
+    execute: function execute() {
+      recaptcha.execute(this.$widgetId);
+    },
+    emitVerify: function emitVerify(response) {
+      this.$emit('verify', response);
+    },
+    emitExpired: function emitExpired() {
+      this.$emit('expired');
+    }
+  },
+  render: function render(h) {
+    return h('div', {}, this.$slots["default"]);
+  }
+};
+
+/* harmony default export */ __webpack_exports__["a"] = (VueRecaptcha);
+
 
 /***/ })
 /******/ ]);

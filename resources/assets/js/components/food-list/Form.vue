@@ -44,6 +44,7 @@
           food: '',
           serving_size: '',
           calories: '',
+          profile_id: '',
         }
       },
       submitForm: function() {

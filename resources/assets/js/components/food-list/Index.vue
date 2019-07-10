@@ -9,16 +9,16 @@
           </el-row>
           <el-row>
             <div class="table-header">
-              <el-col :sm="14">
+              <el-col :xs="6" :sm="14">
                 <el-tooltip effect="dark" content="Refresh Table" placement="bottom">
                   <el-button size="mini" class="export-button" @click="getDatas" :disabled="isProcessing">
                     <i class="fa fa-refresh fa-lg text-blue"></i>
                   </el-button>
                 </el-tooltip>
               </el-col>
-              <el-col :sm="10">
+              <el-col :xs="18" :sm="10">
                 <el-input v-model="search" placeholder="Search" class="input-with-select text-right">
-                  <el-select v-model="searchIn" slot="prepend" placeholder="Select" style="width: 150px" filterable>
+                  <el-select v-model="searchIn" slot="prepend" placeholder="Select" style="width: 100px" filterable>
                     <el-option v-for="s in searchFields" :key="s.value" :value="s.value" :label="s.label"></el-option>
                   </el-select>
                 </el-input>

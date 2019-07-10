@@ -18,6 +18,7 @@ class FoodList extends Authenticatable
         'food', 
         'serving_size', 
         'calories',
+        'profile_id'
     ];
 
     protected $hidden = [

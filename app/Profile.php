@@ -37,4 +37,7 @@ class Profile extends Authenticatable
     public function activity() {
         return $this->belongsTo('App\Activity');
     }
+    public function user() {
+        return $this->hasMany('App\User');
+    }
 }

@@ -15,6 +15,7 @@ class CreateFoodListsTable extends Migration
     {
         Schema::create('food_lists', function (Blueprint $table) {
             $table->increments('id');
+            $table->unsignedInteger('profile_id');
             $table->string('food');
             $table->string('serving_size');
             $table->integer('calories');

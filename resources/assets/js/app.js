@@ -17,6 +17,7 @@ import locale from 'element-ui/lib/locale/lang/en';
 import 'element-ui/lib/theme-chalk/index.css';
 import VueRouter from 'vue-router';
 import router from './router';
+import VueRecaptcha from 'vue-recaptcha';
 
 
 Vue.use(ElementUI, { size: 'small', locale });
@@ -26,6 +27,7 @@ Vue.use(VueRouter);
  * the page. Then, you may begin adding components to this application
  * or customize the JavaScript scaffolding to fit your unique needs.
  */
+Vue.component('vue-recaptcha', VueRecaptcha);
 
 Vue.component('user-login', require('./components/Login.vue'));
 Vue.component('top-header', require('./components/common/Header.vue'));
@@ -78,6 +80,9 @@ const app = new Vue({
     },
     moveTo: function (link) {
       router.push(link);
+    },
+    linkTo: function (link) {
+      window.open(link, "_self");
     },
   }
 });
