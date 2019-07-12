@@ -27,7 +27,7 @@ class FoodListRequest extends FormRequest
     {
         return [
             'food' => 'required',  
-            'serving_size' => 'required|integer',
+            'serving_size' => 'required',
             'calories' => 'required|integer',
         ];
     }

@@ -4,6 +4,7 @@
       <el-col :sm="{span:14}" :md="{span:11, offset:3}" style="margin-bottom: 20px">
         <el-card>
           <h2>My Food Diary</h2>
+          <img :src="'/images/my-food-diary.png'" style="width: 100%">
           <p>My Food Diary helps you monitor your daily calorie intake for a healthy weight-loss journey.</p>
         </el-card>
       </el-col>

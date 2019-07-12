@@ -39,6 +39,8 @@ class ProfileController extends Controller
       }
       // BMR (kcal / day) = 10 * weight (kg) + 6.25 * height (cm) – 5 * age (y) + s (kcal / day),
       // where s is +5 for males and -161 for females.
+      
+      $inputs['bmr'] = $bmr;
 
       if($inputs['activity_id'] == 1) {
         $bmr = $bmr * 1.2;
@@ -56,7 +58,7 @@ class ProfileController extends Controller
       // 1.55: If you are moderately active (moderate exercise/sports 3-5 days/week) = BMR x 1.55
       // 1.725: If you are very active (hard exercise/sports 6-7 days a week) = BMR x 1.725
       // 1.9: If you are extra active (very hard exercise/sports & physical job or 2x training) = BMR x 1.9
-      $inputs['bmr'] = $bmr;
+      
       $inputs['maintain_weight'] = $bmr;
       $inputs['lose_weight'] = $bmr - 495;
       $inputs['lose_weight_fast'] = $bmr - 990;

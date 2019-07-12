@@ -39915,7 +39915,7 @@ module.exports = Component.exports
 /***/ (function(module, exports, __webpack_require__) {
 
 __webpack_require__(217);
-module.exports = __webpack_require__(351);
+module.exports = __webpack_require__(352);
 
 
 /***/ }),
@@ -39932,7 +39932,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_element_ui_lib_theme_chalk_index_css___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2_element_ui_lib_theme_chalk_index_css__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_vue_router__ = __webpack_require__(211);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__router__ = __webpack_require__(333);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5_vue_recaptcha__ = __webpack_require__(353);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5_vue_recaptcha__ = __webpack_require__(342);
 
 /**
  * First we will load all of this project's JavaScript dependencies which
@@ -39964,11 +39964,11 @@ Vue.use(__WEBPACK_IMPORTED_MODULE_3_vue_router__["a" /* default */]);
 Vue.component('vue-recaptcha', __WEBPACK_IMPORTED_MODULE_5_vue_recaptcha__["a" /* default */]);
 
 Vue.component('user-login', __webpack_require__(212));
-Vue.component('top-header', __webpack_require__(342));
-Vue.component('login-header', __webpack_require__(345));
+Vue.component('top-header', __webpack_require__(343));
+Vue.component('login-header', __webpack_require__(346));
 Vue.component('food-diary', __webpack_require__(213));
 Vue.component('food-list', __webpack_require__(214));
-Vue.component('food-list-form-modal', __webpack_require__(348));
+Vue.component('food-list-form-modal', __webpack_require__(349));
 Vue.component('profile', __webpack_require__(215));
 
 var app = new Vue({
@@ -128705,6 +128705,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
@@ -128801,6 +128802,11 @@ var render = function() {
             [
               _c("el-card", [
                 _c("h2", [_vm._v("My Food Diary")]),
+                _vm._v(" "),
+                _c("img", {
+                  staticStyle: { width: "100%" },
+                  attrs: { src: "/images/my-food-diary.png" }
+                }),
                 _vm._v(" "),
                 _c("p", [
                   _vm._v(
@@ -130893,590 +130899,6 @@ if (false) {
 
 /***/ }),
 /* 342 */
-/***/ (function(module, exports, __webpack_require__) {
-
-var disposed = false
-var normalizeComponent = __webpack_require__(11)
-/* script */
-var __vue_script__ = __webpack_require__(343)
-/* template */
-var __vue_template__ = __webpack_require__(344)
-/* template functional */
-var __vue_template_functional__ = false
-/* styles */
-var __vue_styles__ = null
-/* scopeId */
-var __vue_scopeId__ = null
-/* moduleIdentifier (server only) */
-var __vue_module_identifier__ = null
-var Component = normalizeComponent(
-  __vue_script__,
-  __vue_template__,
-  __vue_template_functional__,
-  __vue_styles__,
-  __vue_scopeId__,
-  __vue_module_identifier__
-)
-Component.options.__file = "resources/assets/js/components/common/Header.vue"
-
-/* hot reload */
-if (false) {(function () {
-  var hotAPI = require("vue-hot-reload-api")
-  hotAPI.install(require("vue"), false)
-  if (!hotAPI.compatible) return
-  module.hot.accept()
-  if (!module.hot.data) {
-    hotAPI.createRecord("data-v-39307e4a", Component.options)
-  } else {
-    hotAPI.reload("data-v-39307e4a", Component.options)
-  }
-  module.hot.dispose(function (data) {
-    disposed = true
-  })
-})()}
-
-module.exports = Component.exports
-
-
-/***/ }),
-/* 343 */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-
-/* harmony default export */ __webpack_exports__["default"] = ({});
-
-/***/ }),
-/* 344 */
-/***/ (function(module, exports, __webpack_require__) {
-
-var render = function() {
-  var _vm = this
-  var _h = _vm.$createElement
-  var _c = _vm._self._c || _h
-  return _c(
-    "div",
-    [
-      _c(
-        "el-menu",
-        { staticClass: "el-menu", attrs: { mode: "horizontal" } },
-        [
-          _c(
-            "el-menu-item",
-            {
-              attrs: { index: "1" },
-              on: {
-                click: function($event) {
-                  return _vm.$root.moveTo("/food-diary")
-                }
-              }
-            },
-            [_vm._v("FOOD DIARY")]
-          ),
-          _vm._v(" "),
-          _c(
-            "el-menu-item",
-            {
-              attrs: { index: "2" },
-              on: {
-                click: function($event) {
-                  return _vm.$root.moveTo("/food-list")
-                }
-              }
-            },
-            [_vm._v("FOOD LIST")]
-          ),
-          _vm._v(" "),
-          _c(
-            "el-menu-item",
-            {
-              attrs: { index: "3" },
-              on: {
-                click: function($event) {
-                  return _vm.$root.moveTo("/profile")
-                }
-              }
-            },
-            [_vm._v("PROFILE")]
-          ),
-          _vm._v(" "),
-          _c(
-            "el-menu-item",
-            {
-              staticStyle: { background: "#FBCFD0", color: "red" },
-              attrs: { index: "4" },
-              on: {
-                click: function($event) {
-                  return _vm.$root.linkTo("/logout")
-                }
-              }
-            },
-            [_vm._v("LOGOUT")]
-          )
-        ],
-        1
-      )
-    ],
-    1
-  )
-}
-var staticRenderFns = []
-render._withStripped = true
-module.exports = { render: render, staticRenderFns: staticRenderFns }
-if (false) {
-  module.hot.accept()
-  if (module.hot.data) {
-    require("vue-hot-reload-api")      .rerender("data-v-39307e4a", module.exports)
-  }
-}
-
-/***/ }),
-/* 345 */
-/***/ (function(module, exports, __webpack_require__) {
-
-var disposed = false
-var normalizeComponent = __webpack_require__(11)
-/* script */
-var __vue_script__ = __webpack_require__(346)
-/* template */
-var __vue_template__ = __webpack_require__(347)
-/* template functional */
-var __vue_template_functional__ = false
-/* styles */
-var __vue_styles__ = null
-/* scopeId */
-var __vue_scopeId__ = null
-/* moduleIdentifier (server only) */
-var __vue_module_identifier__ = null
-var Component = normalizeComponent(
-  __vue_script__,
-  __vue_template__,
-  __vue_template_functional__,
-  __vue_styles__,
-  __vue_scopeId__,
-  __vue_module_identifier__
-)
-Component.options.__file = "resources/assets/js/components/common/LoginHeader.vue"
-
-/* hot reload */
-if (false) {(function () {
-  var hotAPI = require("vue-hot-reload-api")
-  hotAPI.install(require("vue"), false)
-  if (!hotAPI.compatible) return
-  module.hot.accept()
-  if (!module.hot.data) {
-    hotAPI.createRecord("data-v-7da2ea69", Component.options)
-  } else {
-    hotAPI.reload("data-v-7da2ea69", Component.options)
-  }
-  module.hot.dispose(function (data) {
-    disposed = true
-  })
-})()}
-
-module.exports = Component.exports
-
-
-/***/ }),
-/* 346 */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-//
-//
-//
-//
-//
-//
-
-/* harmony default export */ __webpack_exports__["default"] = ({
-  data: function data() {
-    return {};
-  },
-
-  methods: {}
-});
-
-/***/ }),
-/* 347 */
-/***/ (function(module, exports, __webpack_require__) {
-
-var render = function() {
-  var _vm = this
-  var _h = _vm.$createElement
-  var _c = _vm._self._c || _h
-  return _c("div")
-}
-var staticRenderFns = []
-render._withStripped = true
-module.exports = { render: render, staticRenderFns: staticRenderFns }
-if (false) {
-  module.hot.accept()
-  if (module.hot.data) {
-    require("vue-hot-reload-api")      .rerender("data-v-7da2ea69", module.exports)
-  }
-}
-
-/***/ }),
-/* 348 */
-/***/ (function(module, exports, __webpack_require__) {
-
-var disposed = false
-var normalizeComponent = __webpack_require__(11)
-/* script */
-var __vue_script__ = __webpack_require__(349)
-/* template */
-var __vue_template__ = __webpack_require__(350)
-/* template functional */
-var __vue_template_functional__ = false
-/* styles */
-var __vue_styles__ = null
-/* scopeId */
-var __vue_scopeId__ = null
-/* moduleIdentifier (server only) */
-var __vue_module_identifier__ = null
-var Component = normalizeComponent(
-  __vue_script__,
-  __vue_template__,
-  __vue_template_functional__,
-  __vue_styles__,
-  __vue_scopeId__,
-  __vue_module_identifier__
-)
-Component.options.__file = "resources/assets/js/components/food-list/Form.vue"
-
-/* hot reload */
-if (false) {(function () {
-  var hotAPI = require("vue-hot-reload-api")
-  hotAPI.install(require("vue"), false)
-  if (!hotAPI.compatible) return
-  module.hot.accept()
-  if (!module.hot.data) {
-    hotAPI.createRecord("data-v-7f4d0846", Component.options)
-  } else {
-    hotAPI.reload("data-v-7f4d0846", Component.options)
-  }
-  module.hot.dispose(function (data) {
-    disposed = true
-  })
-})()}
-
-module.exports = Component.exports
-
-
-/***/ }),
-/* 349 */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-
-var URL = '/food-list/';
-/* harmony default export */ __webpack_exports__["default"] = ({
-  data: function data() {
-    return {
-      formData: this.initFormData(),
-      formError: '',
-      formMode: '',
-      formIndex: '',
-      isShowModal: false,
-      isProcessing: false
-    };
-  },
-
-  methods: {
-    initFormData: function initFormData() {
-      return {
-        food: '',
-        serving_size: '',
-        calories: '',
-        profile_id: ''
-      };
-    },
-    submitForm: function submitForm() {
-      var _this = this;
-
-      this.isProcessing = true;
-      var postUrl = this.formMode == 'store' ? URL + 'new' : URL + 'edit/' + this.formData.id;
-      axios.post(postUrl, this.formData).then(function (response) {
-        _this.isProcessing = false;
-        _this.$root.showMessage('success', _this.formData.food + ' ' + response.data.message);
-        if (_this.formMode == 'store') {
-          _this.$parent.food_list.push(response.data.food_list);
-        } else {
-          _.assign(_this.$parent.food_list[_this.formIndex], _this.formData);
-        }
-        _this.formError = '';
-        _this.isShowModal = false;
-      }).catch(function (error) {
-        if (error.response.status == 401) {
-          location.reload();
-        } else if (error.response.status == 422) {
-          _this.formError = error.response.data;
-        } else {
-          _this.$root.showMessage('error', error.response.data.message);
-          _this.formError = '';
-        }
-        _this.isProcessing = false;
-      });
-    },
-    showModal: function showModal(data) {
-      var _this2 = this;
-
-      this.formMode = data === '' ? 'store' : 'update';
-      if (this.formMode == 'store') {
-        this.formData = this.initFormData();
-      } else {
-        this.formIndex = _.findIndex(this.$parent.food_list, { 'id': data.id });
-        this.formData = Object.assign({}, data);
-      }
-      this.formError = '';
-      Vue.nextTick(function () {
-        return _this2.isShowModal = true;
-      });
-    }
-  }
-});
-
-/***/ }),
-/* 350 */
-/***/ (function(module, exports, __webpack_require__) {
-
-var render = function() {
-  var _vm = this
-  var _h = _vm.$createElement
-  var _c = _vm._self._c || _h
-  return _c(
-    "el-dialog",
-    {
-      attrs: {
-        title: (_vm.formMode == "store" ? "New" : "Update") + " - Food",
-        visible: _vm.isShowModal,
-        "close-on-click-modal": false,
-        "show-close": false,
-        "modal-append-to-body": false,
-        top: "1em",
-        width: "50%",
-        "close-on-press-escape": false
-      },
-      on: {
-        "update:visible": function($event) {
-          _vm.isShowModal = $event
-        }
-      }
-    },
-    [
-      _c(
-        "el-form",
-        {
-          directives: [
-            {
-              name: "loading",
-              rawName: "v-loading",
-              value: _vm.isProcessing,
-              expression: "isProcessing"
-            }
-          ],
-          attrs: {
-            "label-position": "top",
-            "element-loading-text": "Processing ..."
-          }
-        },
-        [
-          _c(
-            "el-row",
-            { attrs: { gutter: 20 } },
-            [
-              _c(
-                "el-col",
-                { attrs: { span: 24 } },
-                [
-                  _c(
-                    "el-form-item",
-                    {
-                      attrs: {
-                        label: "Food",
-                        required: "",
-                        error: _vm.formError.food
-                      }
-                    },
-                    [
-                      _c("el-input", {
-                        attrs: { type: "text" },
-                        model: {
-                          value: _vm.formData.food,
-                          callback: function($$v) {
-                            _vm.$set(_vm.formData, "food", $$v)
-                          },
-                          expression: "formData.food"
-                        }
-                      })
-                    ],
-                    1
-                  ),
-                  _vm._v(" "),
-                  _c(
-                    "el-form-item",
-                    {
-                      attrs: {
-                        label: "Serving Size",
-                        required: "",
-                        error: _vm.formError.serving_size
-                      }
-                    },
-                    [
-                      _c("el-input", {
-                        attrs: { type: "text" },
-                        model: {
-                          value: _vm.formData.serving_size,
-                          callback: function($$v) {
-                            _vm.$set(_vm.formData, "serving_size", $$v)
-                          },
-                          expression: "formData.serving_size"
-                        }
-                      })
-                    ],
-                    1
-                  ),
-                  _vm._v(" "),
-                  _c(
-                    "el-form-item",
-                    {
-                      attrs: {
-                        label: "Calories",
-                        required: "",
-                        error: _vm.formError.calories
-                      }
-                    },
-                    [
-                      _c("el-input", {
-                        attrs: { type: "text" },
-                        model: {
-                          value: _vm.formData.calories,
-                          callback: function($$v) {
-                            _vm.$set(_vm.formData, "calories", $$v)
-                          },
-                          expression: "formData.calories"
-                        }
-                      })
-                    ],
-                    1
-                  )
-                ],
-                1
-              )
-            ],
-            1
-          )
-        ],
-        1
-      ),
-      _vm._v(" "),
-      _c(
-        "span",
-        { attrs: { slot: "footer" }, slot: "footer" },
-        [
-          _c(
-            "el-button",
-            {
-              class: _vm.formMode == "store" ? "btn-store" : "btn-edit",
-              attrs: {
-                type: "primary",
-                size: "mini",
-                disabled: _vm.isProcessing
-              },
-              on: { click: _vm.submitForm }
-            },
-            [
-              _vm._v(
-                "\n      " +
-                  _vm._s(_vm.formMode == "store" ? "Save" : "Update") +
-                  "\n    "
-              )
-            ]
-          ),
-          _vm._v(" "),
-          _c(
-            "el-button",
-            {
-              staticClass: "btn-close",
-              attrs: { size: "mini", disabled: _vm.isProcessing },
-              on: {
-                click: function($event) {
-                  _vm.isShowModal = false
-                }
-              }
-            },
-            [_vm._v("Close")]
-          )
-        ],
-        1
-      )
-    ],
-    1
-  )
-}
-var staticRenderFns = []
-render._withStripped = true
-module.exports = { render: render, staticRenderFns: staticRenderFns }
-if (false) {
-  module.hot.accept()
-  if (module.hot.data) {
-    require("vue-hot-reload-api")      .rerender("data-v-7f4d0846", module.exports)
-  }
-}
-
-/***/ }),
-/* 351 */
-/***/ (function(module, exports) {
-
-// removed by extract-text-webpack-plugin
-
-/***/ }),
-/* 352 */,
-/* 353 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -131674,6 +131096,612 @@ var VueRecaptcha = {
 
 /* harmony default export */ __webpack_exports__["a"] = (VueRecaptcha);
 
+
+/***/ }),
+/* 343 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var disposed = false
+var normalizeComponent = __webpack_require__(11)
+/* script */
+var __vue_script__ = __webpack_require__(344)
+/* template */
+var __vue_template__ = __webpack_require__(345)
+/* template functional */
+var __vue_template_functional__ = false
+/* styles */
+var __vue_styles__ = null
+/* scopeId */
+var __vue_scopeId__ = null
+/* moduleIdentifier (server only) */
+var __vue_module_identifier__ = null
+var Component = normalizeComponent(
+  __vue_script__,
+  __vue_template__,
+  __vue_template_functional__,
+  __vue_styles__,
+  __vue_scopeId__,
+  __vue_module_identifier__
+)
+Component.options.__file = "resources/assets/js/components/common/Header.vue"
+
+/* hot reload */
+if (false) {(function () {
+  var hotAPI = require("vue-hot-reload-api")
+  hotAPI.install(require("vue"), false)
+  if (!hotAPI.compatible) return
+  module.hot.accept()
+  if (!module.hot.data) {
+    hotAPI.createRecord("data-v-39307e4a", Component.options)
+  } else {
+    hotAPI.reload("data-v-39307e4a", Component.options)
+  }
+  module.hot.dispose(function (data) {
+    disposed = true
+  })
+})()}
+
+module.exports = Component.exports
+
+
+/***/ }),
+/* 344 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+/* harmony default export */ __webpack_exports__["default"] = ({});
+
+/***/ }),
+/* 345 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c(
+    "div",
+    [
+      _c(
+        "el-menu",
+        {
+          staticClass: "el-menu",
+          attrs: {
+            router: true,
+            "default-active": _vm.$route.path,
+            mode: "horizontal"
+          }
+        },
+        [
+          _c(
+            "el-menu-item",
+            {
+              attrs: { index: "/food-diary" },
+              on: {
+                click: function($event) {
+                  return _vm.$root.moveTo("/food-diary")
+                }
+              }
+            },
+            [_vm._v("FOOD DIARY")]
+          ),
+          _vm._v(" "),
+          _c(
+            "el-menu-item",
+            {
+              attrs: { index: "/food-list" },
+              on: {
+                click: function($event) {
+                  return _vm.$root.moveTo("/food-list")
+                }
+              }
+            },
+            [_vm._v("FOOD LIST")]
+          ),
+          _vm._v(" "),
+          _c(
+            "el-submenu",
+            [
+              _c("template", { slot: "title" }, [
+                _c("i", {
+                  staticClass: "fa fa-2x fa-user-circle",
+                  staticStyle: { color: "#fff" }
+                })
+              ]),
+              _vm._v(" "),
+              _c(
+                "el-menu-item",
+                {
+                  attrs: { index: "/profile" },
+                  on: {
+                    click: function($event) {
+                      return _vm.$root.moveTo("/profile")
+                    }
+                  }
+                },
+                [_vm._v("PROFILE")]
+              ),
+              _vm._v(" "),
+              _c(
+                "el-menu-item",
+                {
+                  on: {
+                    click: function($event) {
+                      return _vm.$root.linkTo("/logout")
+                    }
+                  }
+                },
+                [_vm._v("LOGOUT")]
+              )
+            ],
+            2
+          )
+        ],
+        1
+      )
+    ],
+    1
+  )
+}
+var staticRenderFns = []
+render._withStripped = true
+module.exports = { render: render, staticRenderFns: staticRenderFns }
+if (false) {
+  module.hot.accept()
+  if (module.hot.data) {
+    require("vue-hot-reload-api")      .rerender("data-v-39307e4a", module.exports)
+  }
+}
+
+/***/ }),
+/* 346 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var disposed = false
+var normalizeComponent = __webpack_require__(11)
+/* script */
+var __vue_script__ = __webpack_require__(347)
+/* template */
+var __vue_template__ = __webpack_require__(348)
+/* template functional */
+var __vue_template_functional__ = false
+/* styles */
+var __vue_styles__ = null
+/* scopeId */
+var __vue_scopeId__ = null
+/* moduleIdentifier (server only) */
+var __vue_module_identifier__ = null
+var Component = normalizeComponent(
+  __vue_script__,
+  __vue_template__,
+  __vue_template_functional__,
+  __vue_styles__,
+  __vue_scopeId__,
+  __vue_module_identifier__
+)
+Component.options.__file = "resources/assets/js/components/common/LoginHeader.vue"
+
+/* hot reload */
+if (false) {(function () {
+  var hotAPI = require("vue-hot-reload-api")
+  hotAPI.install(require("vue"), false)
+  if (!hotAPI.compatible) return
+  module.hot.accept()
+  if (!module.hot.data) {
+    hotAPI.createRecord("data-v-7da2ea69", Component.options)
+  } else {
+    hotAPI.reload("data-v-7da2ea69", Component.options)
+  }
+  module.hot.dispose(function (data) {
+    disposed = true
+  })
+})()}
+
+module.exports = Component.exports
+
+
+/***/ }),
+/* 347 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+//
+//
+//
+//
+//
+//
+
+/* harmony default export */ __webpack_exports__["default"] = ({
+  data: function data() {
+    return {};
+  },
+
+  methods: {}
+});
+
+/***/ }),
+/* 348 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c("div")
+}
+var staticRenderFns = []
+render._withStripped = true
+module.exports = { render: render, staticRenderFns: staticRenderFns }
+if (false) {
+  module.hot.accept()
+  if (module.hot.data) {
+    require("vue-hot-reload-api")      .rerender("data-v-7da2ea69", module.exports)
+  }
+}
+
+/***/ }),
+/* 349 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var disposed = false
+var normalizeComponent = __webpack_require__(11)
+/* script */
+var __vue_script__ = __webpack_require__(350)
+/* template */
+var __vue_template__ = __webpack_require__(351)
+/* template functional */
+var __vue_template_functional__ = false
+/* styles */
+var __vue_styles__ = null
+/* scopeId */
+var __vue_scopeId__ = null
+/* moduleIdentifier (server only) */
+var __vue_module_identifier__ = null
+var Component = normalizeComponent(
+  __vue_script__,
+  __vue_template__,
+  __vue_template_functional__,
+  __vue_styles__,
+  __vue_scopeId__,
+  __vue_module_identifier__
+)
+Component.options.__file = "resources/assets/js/components/food-list/Form.vue"
+
+/* hot reload */
+if (false) {(function () {
+  var hotAPI = require("vue-hot-reload-api")
+  hotAPI.install(require("vue"), false)
+  if (!hotAPI.compatible) return
+  module.hot.accept()
+  if (!module.hot.data) {
+    hotAPI.createRecord("data-v-7f4d0846", Component.options)
+  } else {
+    hotAPI.reload("data-v-7f4d0846", Component.options)
+  }
+  module.hot.dispose(function (data) {
+    disposed = true
+  })
+})()}
+
+module.exports = Component.exports
+
+
+/***/ }),
+/* 350 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+var URL = '/food-list/';
+/* harmony default export */ __webpack_exports__["default"] = ({
+  data: function data() {
+    return {
+      formData: this.initFormData(),
+      formError: '',
+      formMode: '',
+      formIndex: '',
+      isShowModal: false,
+      isProcessing: false
+    };
+  },
+
+  methods: {
+    initFormData: function initFormData() {
+      return {
+        food: '',
+        serving_size: '',
+        calories: '',
+        profile_id: ''
+      };
+    },
+    submitForm: function submitForm() {
+      var _this = this;
+
+      this.isProcessing = true;
+      var postUrl = this.formMode == 'store' ? URL + 'new' : URL + 'edit/' + this.formData.id;
+      axios.post(postUrl, this.formData).then(function (response) {
+        _this.isProcessing = false;
+        _this.$root.showMessage('success', _this.formData.food + ' ' + response.data.message);
+        if (_this.formMode == 'store') {
+          _this.$parent.food_list.push(response.data.food_list);
+        } else {
+          _.assign(_this.$parent.food_list[_this.formIndex], _this.formData);
+        }
+        _this.formError = '';
+        _this.isShowModal = false;
+      }).catch(function (error) {
+        if (error.response.status == 401) {
+          location.reload();
+        } else if (error.response.status == 422) {
+          _this.formError = error.response.data;
+        } else {
+          _this.$root.showMessage('error', error.response.data.message);
+          _this.formError = '';
+        }
+        _this.isProcessing = false;
+      });
+    },
+    showModal: function showModal(data) {
+      var _this2 = this;
+
+      this.formMode = data === '' ? 'store' : 'update';
+      if (this.formMode == 'store') {
+        this.formData = this.initFormData();
+      } else {
+        this.formIndex = _.findIndex(this.$parent.food_list, { 'id': data.id });
+        this.formData = Object.assign({}, data);
+      }
+      this.formError = '';
+      Vue.nextTick(function () {
+        return _this2.isShowModal = true;
+      });
+    }
+  }
+});
+
+/***/ }),
+/* 351 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c(
+    "el-dialog",
+    {
+      attrs: {
+        title: (_vm.formMode == "store" ? "New" : "Update") + " - Food",
+        visible: _vm.isShowModal,
+        "close-on-click-modal": false,
+        "show-close": false,
+        "modal-append-to-body": false,
+        top: "1em",
+        width: "50%",
+        "close-on-press-escape": false
+      },
+      on: {
+        "update:visible": function($event) {
+          _vm.isShowModal = $event
+        }
+      }
+    },
+    [
+      _c(
+        "el-form",
+        {
+          directives: [
+            {
+              name: "loading",
+              rawName: "v-loading",
+              value: _vm.isProcessing,
+              expression: "isProcessing"
+            }
+          ],
+          attrs: {
+            "label-position": "top",
+            "element-loading-text": "Processing ..."
+          }
+        },
+        [
+          _c(
+            "el-row",
+            { attrs: { gutter: 20 } },
+            [
+              _c(
+                "el-col",
+                { attrs: { span: 24 } },
+                [
+                  _c(
+                    "el-form-item",
+                    {
+                      attrs: {
+                        label: "Food",
+                        required: "",
+                        error: _vm.formError.food
+                      }
+                    },
+                    [
+                      _c("el-input", {
+                        attrs: { type: "text" },
+                        model: {
+                          value: _vm.formData.food,
+                          callback: function($$v) {
+                            _vm.$set(_vm.formData, "food", $$v)
+                          },
+                          expression: "formData.food"
+                        }
+                      })
+                    ],
+                    1
+                  ),
+                  _vm._v(" "),
+                  _c(
+                    "el-form-item",
+                    {
+                      attrs: {
+                        label: "Serving Size",
+                        required: "",
+                        error: _vm.formError.serving_size
+                      }
+                    },
+                    [
+                      _c("el-input", {
+                        attrs: { type: "text" },
+                        model: {
+                          value: _vm.formData.serving_size,
+                          callback: function($$v) {
+                            _vm.$set(_vm.formData, "serving_size", $$v)
+                          },
+                          expression: "formData.serving_size"
+                        }
+                      })
+                    ],
+                    1
+                  ),
+                  _vm._v(" "),
+                  _c(
+                    "el-form-item",
+                    {
+                      attrs: {
+                        label: "Calories",
+                        required: "",
+                        error: _vm.formError.calories
+                      }
+                    },
+                    [
+                      _c("el-input", {
+                        attrs: { type: "text" },
+                        model: {
+                          value: _vm.formData.calories,
+                          callback: function($$v) {
+                            _vm.$set(_vm.formData, "calories", $$v)
+                          },
+                          expression: "formData.calories"
+                        }
+                      })
+                    ],
+                    1
+                  )
+                ],
+                1
+              )
+            ],
+            1
+          )
+        ],
+        1
+      ),
+      _vm._v(" "),
+      _c(
+        "span",
+        { attrs: { slot: "footer" }, slot: "footer" },
+        [
+          _c(
+            "el-button",
+            {
+              class: _vm.formMode == "store" ? "btn-store" : "btn-edit",
+              attrs: {
+                type: "primary",
+                size: "mini",
+                disabled: _vm.isProcessing
+              },
+              on: { click: _vm.submitForm }
+            },
+            [
+              _vm._v(
+                "\n      " +
+                  _vm._s(_vm.formMode == "store" ? "Save" : "Update") +
+                  "\n    "
+              )
+            ]
+          ),
+          _vm._v(" "),
+          _c(
+            "el-button",
+            {
+              staticClass: "btn-close",
+              attrs: { size: "mini", disabled: _vm.isProcessing },
+              on: {
+                click: function($event) {
+                  _vm.isShowModal = false
+                }
+              }
+            },
+            [_vm._v("Close")]
+          )
+        ],
+        1
+      )
+    ],
+    1
+  )
+}
+var staticRenderFns = []
+render._withStripped = true
+module.exports = { render: render, staticRenderFns: staticRenderFns }
+if (false) {
+  module.hot.accept()
+  if (module.hot.data) {
+    require("vue-hot-reload-api")      .rerender("data-v-7f4d0846", module.exports)
+  }
+}
+
+/***/ }),
+/* 352 */
+/***/ (function(module, exports) {
+
+// removed by extract-text-webpack-plugin
 
 /***/ })
 /******/ ]);
