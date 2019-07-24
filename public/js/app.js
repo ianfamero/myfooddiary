@@ -129057,31 +129057,6 @@ var render = function() {
                                 1
                               ),
                               _vm._v(" "),
-                              _c(
-                                "el-form-item",
-                                [
-                                  _c(
-                                    "el-checkbox",
-                                    {
-                                      model: {
-                                        value: _vm.iAccept,
-                                        callback: function($$v) {
-                                          _vm.iAccept = $$v
-                                        },
-                                        expression: "iAccept"
-                                      }
-                                    },
-                                    [
-                                      _vm._v("I accept the "),
-                                      _c("a", { attrs: { href: "#" } }, [
-                                        _vm._v("Terms of Service")
-                                      ])
-                                    ]
-                                  )
-                                ],
-                                1
-                              ),
-                              _vm._v(" "),
                               _c("vue-recaptcha", {
                                 attrs: {
                                   sitekey:
@@ -129223,6 +129198,43 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 var URL = '/food-diary/';
 /* harmony default export */ __webpack_exports__["default"] = ({
@@ -129269,6 +129281,9 @@ var URL = '/food-diary/';
         _this.food_list = response.data.food_list;
         _this.food_intake = response.data.food_intake;
         _this.total_calories_today = response.data.total_calories_today;
+        _this.total_carb_today = response.data.total_carb_today;
+        _this.total_fat_today = response.data.total_fat_today;
+        _this.total_protein_today = response.data.total_protein_today;
         _this.profile = response.data.profile;
         _this.isProcessing = false;
       }).catch(function (error) {
@@ -129329,7 +129344,7 @@ var render = function() {
             "el-col",
             {
               staticStyle: { "margin-bottom": "20px" },
-              attrs: { xs: 24, sm: 8 }
+              attrs: { xs: 24, sm: 7 }
             },
             [
               _c(
@@ -129353,108 +129368,160 @@ var render = function() {
                     },
                     [
                       _c(
-                        "el-form-item",
-                        {
-                          attrs: {
-                            label: "Date",
-                            error: _vm.formError.date,
-                            required: ""
-                          }
-                        },
-                        [
-                          _c("el-date-picker", {
-                            staticStyle: { width: "100%" },
-                            attrs: {
-                              type: "date",
-                              placeholder: "Date",
-                              format: "MMMM d, yyyy",
-                              "value-format": "yyyy/MM/dd",
-                              clearable: false
-                            },
-                            on: { change: _vm.getDatas },
-                            model: {
-                              value: _vm.formData.date,
-                              callback: function($$v) {
-                                _vm.$set(_vm.formData, "date", $$v)
-                              },
-                              expression: "formData.date"
-                            }
-                          })
-                        ],
-                        1
-                      ),
-                      _vm._v(" "),
-                      _c(
-                        "el-form-item",
-                        {
-                          attrs: {
-                            label: "Meal Type",
-                            required: "",
-                            error: _vm.formError.meal_type_id
-                          }
-                        },
+                        "el-row",
+                        { attrs: { gutter: 20 } },
                         [
                           _c(
-                            "el-select",
-                            {
-                              staticStyle: { width: "100%" },
-                              attrs: { placeholder: "Select", filterable: "" },
-                              model: {
-                                value: _vm.formData.meal_type_id,
-                                callback: function($$v) {
-                                  _vm.$set(_vm.formData, "meal_type_id", $$v)
+                            "el-col",
+                            { attrs: { span: 12 } },
+                            [
+                              _c(
+                                "el-form-item",
+                                {
+                                  attrs: {
+                                    label: "Date",
+                                    error: _vm.formError.date,
+                                    required: ""
+                                  }
                                 },
-                                expression: "formData.meal_type_id"
-                              }
-                            },
-                            _vm._l(_vm.meal_types, function(meal) {
-                              return _c("el-option", {
-                                key: meal.id,
-                                attrs: { label: meal.meal_type, value: meal.id }
-                              })
-                            }),
+                                [
+                                  _c("el-date-picker", {
+                                    staticStyle: { width: "100%" },
+                                    attrs: {
+                                      type: "date",
+                                      placeholder: "Date",
+                                      format: "MMMM d, yyyy",
+                                      "value-format": "yyyy/MM/dd",
+                                      clearable: false
+                                    },
+                                    on: { change: _vm.getDatas },
+                                    model: {
+                                      value: _vm.formData.date,
+                                      callback: function($$v) {
+                                        _vm.$set(_vm.formData, "date", $$v)
+                                      },
+                                      expression: "formData.date"
+                                    }
+                                  })
+                                ],
+                                1
+                              )
+                            ],
                             1
-                          )
-                        ],
-                        1
-                      ),
-                      _vm._v(" "),
-                      _c(
-                        "el-form-item",
-                        {
-                          attrs: {
-                            label: "Food",
-                            required: "",
-                            error: _vm.formError.food_list_id
-                          }
-                        },
-                        [
+                          ),
+                          _vm._v(" "),
                           _c(
-                            "el-select",
-                            {
-                              staticStyle: { width: "100%" },
-                              attrs: { placeholder: "Select", filterable: "" },
-                              model: {
-                                value: _vm.formData.food_list_id,
-                                callback: function($$v) {
-                                  _vm.$set(_vm.formData, "food_list_id", $$v)
+                            "el-col",
+                            { attrs: { span: 12 } },
+                            [
+                              _c(
+                                "el-form-item",
+                                {
+                                  attrs: {
+                                    label: "Meal Type",
+                                    required: "",
+                                    error: _vm.formError.meal_type_id
+                                  }
                                 },
-                                expression: "formData.food_list_id"
-                              }
-                            },
-                            _vm._l(_vm.food_list, function(food) {
-                              return _c("el-option", {
-                                key: food.id,
-                                attrs: {
-                                  label:
-                                    food.food +
-                                    " (" +
-                                    food.calories +
-                                    " calories)",
-                                  value: food.id
-                                }
-                              })
-                            }),
+                                [
+                                  _c(
+                                    "el-select",
+                                    {
+                                      staticStyle: { width: "100%" },
+                                      attrs: {
+                                        placeholder: "Select",
+                                        filterable: ""
+                                      },
+                                      model: {
+                                        value: _vm.formData.meal_type_id,
+                                        callback: function($$v) {
+                                          _vm.$set(
+                                            _vm.formData,
+                                            "meal_type_id",
+                                            $$v
+                                          )
+                                        },
+                                        expression: "formData.meal_type_id"
+                                      }
+                                    },
+                                    _vm._l(_vm.meal_types, function(meal) {
+                                      return _c("el-option", {
+                                        key: meal.id,
+                                        attrs: {
+                                          label: meal.meal_type,
+                                          value: meal.id
+                                        }
+                                      })
+                                    }),
+                                    1
+                                  )
+                                ],
+                                1
+                              )
+                            ],
+                            1
+                          ),
+                          _vm._v(" "),
+                          _c(
+                            "el-col",
+                            { attrs: { span: 24 } },
+                            [
+                              _c(
+                                "el-form-item",
+                                {
+                                  attrs: {
+                                    label: "Food",
+                                    required: "",
+                                    error: _vm.formError.food_list_id
+                                  }
+                                },
+                                [
+                                  _c(
+                                    "el-select",
+                                    {
+                                      staticStyle: { width: "100%" },
+                                      attrs: {
+                                        placeholder: "Select",
+                                        filterable: ""
+                                      },
+                                      model: {
+                                        value: _vm.formData.food_list_id,
+                                        callback: function($$v) {
+                                          _vm.$set(
+                                            _vm.formData,
+                                            "food_list_id",
+                                            $$v
+                                          )
+                                        },
+                                        expression: "formData.food_list_id"
+                                      }
+                                    },
+                                    _vm._l(_vm.food_list, function(food) {
+                                      return _c("el-option", {
+                                        key: food.id,
+                                        attrs: {
+                                          label:
+                                            food.food +
+                                            " with " +
+                                            food.calories +
+                                            " calories (" +
+                                            food.carb +
+                                            "g carbs, " +
+                                            food.fat +
+                                            "g fat, " +
+                                            food.protein +
+                                            "g protein) in " +
+                                            food.serving_size,
+                                          value: food.id
+                                        }
+                                      })
+                                    }),
+                                    1
+                                  )
+                                ],
+                                1
+                              )
+                            ],
                             1
                           )
                         ],
@@ -129478,38 +129545,107 @@ var render = function() {
               _c("br"),
               _vm._v(" "),
               _c("el-card", [
-                _c("p", [
-                  _vm._v("Maintain Weight: "),
-                  _c("b", [
-                    _vm._v(
-                      _vm._s(_vm.total_calories_today) +
-                        " / " +
-                        _vm._s(_vm.profile[0].maintain_weight)
+                _c("h3", [_vm._v("Lose Weight Fast:")]),
+                _vm._v(
+                  "\n        Calories: " +
+                    _vm._s(_vm.total_calories_today) +
+                    " / " +
+                    _vm._s(_vm.profile[0].lose_weight_fast)
+                ),
+                _c("br"),
+                _vm._v(
+                  "\n        Carbohydrates: " +
+                    _vm._s(_vm.total_carb_today) +
+                    " / " +
+                    _vm._s(
+                      Math.round((_vm.profile[0].lose_weight_fast * 0.5) / 4)
                     )
-                  ])
-                ]),
+                ),
+                _c("br"),
+                _vm._v(
+                  "\n        Fat: " +
+                    _vm._s(_vm.total_fat_today) +
+                    " / " +
+                    _vm._s(
+                      Math.round((_vm.profile[0].lose_weight_fast * 0.2) / 9)
+                    )
+                ),
+                _c("br"),
+                _vm._v(
+                  "\n        Protein: " +
+                    _vm._s(_vm.total_protein_today) +
+                    " / " +
+                    _vm._s(
+                      Math.round((_vm.profile[0].lose_weight_fast * 0.3) / 4)
+                    )
+                ),
+                _c("br"),
                 _vm._v(" "),
-                _c("p", [
-                  _vm._v("Lose Weight: "),
-                  _c("b", [
-                    _vm._v(
-                      _vm._s(_vm.total_calories_today) +
-                        " / " +
-                        _vm._s(_vm.profile[0].lose_weight)
-                    )
-                  ])
-                ]),
+                _c("h3", [_vm._v("Lose Weight:")]),
+                _vm._v(
+                  "\n        Calories: " +
+                    _vm._s(_vm.total_calories_today) +
+                    " / " +
+                    _vm._s(_vm.profile[0].lose_weight)
+                ),
+                _c("br"),
+                _vm._v(
+                  "\n        Carbohydrates: " +
+                    _vm._s(_vm.total_carb_today) +
+                    " / " +
+                    _vm._s(Math.round((_vm.profile[0].lose_weight * 0.5) / 4))
+                ),
+                _c("br"),
+                _vm._v(
+                  "\n        Fat: " +
+                    _vm._s(_vm.total_fat_today) +
+                    " / " +
+                    _vm._s(Math.round((_vm.profile[0].lose_weight * 0.2) / 9))
+                ),
+                _c("br"),
+                _vm._v(
+                  "\n        Protein: " +
+                    _vm._s(_vm.total_protein_today) +
+                    " / " +
+                    _vm._s(Math.round((_vm.profile[0].lose_weight * 0.3) / 4))
+                ),
+                _c("br"),
                 _vm._v(" "),
-                _c("p", [
-                  _vm._v("Lose Weight Fast: "),
-                  _c("b", [
-                    _vm._v(
-                      _vm._s(_vm.total_calories_today) +
-                        " / " +
-                        _vm._s(_vm.profile[0].lose_weight_fast)
+                _c("h3", [_vm._v("Maintain Weight:")]),
+                _vm._v(
+                  "\n        Calories: " +
+                    _vm._s(_vm.total_calories_today) +
+                    " / " +
+                    _vm._s(_vm.profile[0].maintain_weight)
+                ),
+                _c("br"),
+                _vm._v(
+                  "\n        Carbohydrates: " +
+                    _vm._s(_vm.total_carb_today) +
+                    " / " +
+                    _vm._s(
+                      Math.round((_vm.profile[0].maintain_weight * 0.5) / 4)
                     )
-                  ])
-                ])
+                ),
+                _c("br"),
+                _vm._v(
+                  "\n        Fat: " +
+                    _vm._s(_vm.total_fat_today) +
+                    " / " +
+                    _vm._s(
+                      Math.round((_vm.profile[0].maintain_weight * 0.2) / 9)
+                    )
+                ),
+                _c("br"),
+                _vm._v(
+                  "\n        Protein: " +
+                    _vm._s(_vm.total_protein_today) +
+                    " / " +
+                    _vm._s(
+                      Math.round((_vm.profile[0].maintain_weight * 0.3) / 4)
+                    )
+                ),
+                _c("br")
               ])
             ],
             1
@@ -129517,7 +129653,7 @@ var render = function() {
           _vm._v(" "),
           _c(
             "el-col",
-            { attrs: { xs: 24, sm: 16 } },
+            { attrs: { xs: 24, sm: 17 } },
             [
               _c(
                 "el-card",
@@ -129543,7 +129679,11 @@ var render = function() {
                       attrs: {
                         data: _vm.food_intake[0],
                         border: "",
-                        stripe: ""
+                        stripe: "",
+                        "default-sort": {
+                          prop: "food_list.food",
+                          order: "ascending"
+                        }
                       }
                     },
                     [
@@ -129552,7 +129692,7 @@ var render = function() {
                           sortable: "",
                           prop: "food_list.food",
                           label: "Food",
-                          "min-width": "180"
+                          "min-width": "250"
                         }
                       }),
                       _vm._v(" "),
@@ -129561,7 +129701,7 @@ var render = function() {
                           sortable: "",
                           prop: "food_list.serving_size",
                           label: "Serving Size",
-                          "min-width": "180"
+                          width: "120"
                         }
                       }),
                       _vm._v(" "),
@@ -129570,7 +129710,34 @@ var render = function() {
                           sortable: "",
                           prop: "food_list.calories",
                           label: "Calories",
-                          "min-width": "180"
+                          width: "100"
+                        }
+                      }),
+                      _vm._v(" "),
+                      _c("el-table-column", {
+                        attrs: {
+                          sortable: "",
+                          prop: "food_list.carb",
+                          label: "Carb (g)",
+                          width: "100"
+                        }
+                      }),
+                      _vm._v(" "),
+                      _c("el-table-column", {
+                        attrs: {
+                          sortable: "",
+                          prop: "food_list.fat",
+                          label: "Fat (g)",
+                          width: "100"
+                        }
+                      }),
+                      _vm._v(" "),
+                      _c("el-table-column", {
+                        attrs: {
+                          sortable: "",
+                          prop: "food_list.protein",
+                          label: "Protein (g)",
+                          width: "110"
                         }
                       }),
                       _vm._v(" "),
@@ -129617,7 +129784,11 @@ var render = function() {
                       attrs: {
                         data: _vm.food_intake[1],
                         border: "",
-                        stripe: ""
+                        stripe: "",
+                        "default-sort": {
+                          prop: "food_list.food",
+                          order: "ascending"
+                        }
                       }
                     },
                     [
@@ -129626,7 +129797,7 @@ var render = function() {
                           sortable: "",
                           prop: "food_list.food",
                           label: "Food",
-                          "min-width": "180"
+                          "min-width": "250"
                         }
                       }),
                       _vm._v(" "),
@@ -129635,7 +129806,7 @@ var render = function() {
                           sortable: "",
                           prop: "food_list.serving_size",
                           label: "Serving Size",
-                          "min-width": "180"
+                          width: "120"
                         }
                       }),
                       _vm._v(" "),
@@ -129644,7 +129815,34 @@ var render = function() {
                           sortable: "",
                           prop: "food_list.calories",
                           label: "Calories",
-                          "min-width": "180"
+                          width: "100"
+                        }
+                      }),
+                      _vm._v(" "),
+                      _c("el-table-column", {
+                        attrs: {
+                          sortable: "",
+                          prop: "food_list.carb",
+                          label: "Carb (g)",
+                          width: "100"
+                        }
+                      }),
+                      _vm._v(" "),
+                      _c("el-table-column", {
+                        attrs: {
+                          sortable: "",
+                          prop: "food_list.fat",
+                          label: "Fat (g)",
+                          width: "100"
+                        }
+                      }),
+                      _vm._v(" "),
+                      _c("el-table-column", {
+                        attrs: {
+                          sortable: "",
+                          prop: "food_list.protein",
+                          label: "Protein (g)",
+                          width: "110"
                         }
                       }),
                       _vm._v(" "),
@@ -129691,7 +129889,11 @@ var render = function() {
                       attrs: {
                         data: _vm.food_intake[2],
                         border: "",
-                        stripe: ""
+                        stripe: "",
+                        "default-sort": {
+                          prop: "food_list.food",
+                          order: "ascending"
+                        }
                       }
                     },
                     [
@@ -129700,7 +129902,7 @@ var render = function() {
                           sortable: "",
                           prop: "food_list.food",
                           label: "Food",
-                          "min-width": "180"
+                          "min-width": "250"
                         }
                       }),
                       _vm._v(" "),
@@ -129709,7 +129911,7 @@ var render = function() {
                           sortable: "",
                           prop: "food_list.serving_size",
                           label: "Serving Size",
-                          "min-width": "180"
+                          width: "120"
                         }
                       }),
                       _vm._v(" "),
@@ -129718,7 +129920,34 @@ var render = function() {
                           sortable: "",
                           prop: "food_list.calories",
                           label: "Calories",
-                          "min-width": "180"
+                          width: "100"
+                        }
+                      }),
+                      _vm._v(" "),
+                      _c("el-table-column", {
+                        attrs: {
+                          sortable: "",
+                          prop: "food_list.carb",
+                          label: "Carb (g)",
+                          width: "100"
+                        }
+                      }),
+                      _vm._v(" "),
+                      _c("el-table-column", {
+                        attrs: {
+                          sortable: "",
+                          prop: "food_list.fat",
+                          label: "Fat (g)",
+                          width: "100"
+                        }
+                      }),
+                      _vm._v(" "),
+                      _c("el-table-column", {
+                        attrs: {
+                          sortable: "",
+                          prop: "food_list.protein",
+                          label: "Protein (g)",
+                          width: "110"
                         }
                       }),
                       _vm._v(" "),
@@ -129765,7 +129994,11 @@ var render = function() {
                       attrs: {
                         data: _vm.food_intake[3],
                         border: "",
-                        stripe: ""
+                        stripe: "",
+                        "default-sort": {
+                          prop: "food_list.food",
+                          order: "ascending"
+                        }
                       }
                     },
                     [
@@ -129774,7 +130007,7 @@ var render = function() {
                           sortable: "",
                           prop: "food_list.food",
                           label: "Food",
-                          "min-width": "180"
+                          "min-width": "250"
                         }
                       }),
                       _vm._v(" "),
@@ -129783,7 +130016,7 @@ var render = function() {
                           sortable: "",
                           prop: "food_list.serving_size",
                           label: "Serving Size",
-                          "min-width": "180"
+                          width: "120"
                         }
                       }),
                       _vm._v(" "),
@@ -129792,7 +130025,34 @@ var render = function() {
                           sortable: "",
                           prop: "food_list.calories",
                           label: "Calories",
-                          "min-width": "180"
+                          width: "100"
+                        }
+                      }),
+                      _vm._v(" "),
+                      _c("el-table-column", {
+                        attrs: {
+                          sortable: "",
+                          prop: "food_list.carb",
+                          label: "Carb (g)",
+                          width: "100"
+                        }
+                      }),
+                      _vm._v(" "),
+                      _c("el-table-column", {
+                        attrs: {
+                          sortable: "",
+                          prop: "food_list.fat",
+                          label: "Fat (g)",
+                          width: "100"
+                        }
+                      }),
+                      _vm._v(" "),
+                      _c("el-table-column", {
+                        attrs: {
+                          sortable: "",
+                          prop: "food_list.protein",
+                          label: "Protein (g)",
+                          width: "110"
                         }
                       }),
                       _vm._v(" "),
@@ -129857,6 +130117,9 @@ if (false) {
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+//
+//
+//
 //
 //
 //
@@ -130237,6 +130500,10 @@ var render = function() {
                                 border: "",
                                 stripe: "",
                                 "empty-text": "No Data Found",
+                                "default-sort": {
+                                  prop: "food",
+                                  order: "ascending"
+                                },
                                 "element-loading-text": "Loading ..."
                               },
                               on: {
@@ -130258,7 +130525,7 @@ var render = function() {
                                   sortable: "",
                                   prop: "food",
                                   label: "Food",
-                                  "min-width": "180"
+                                  "min-width": "250"
                                 }
                               }),
                               _vm._v(" "),
@@ -130267,7 +130534,7 @@ var render = function() {
                                   sortable: "",
                                   prop: "serving_size",
                                   label: "Serving Size",
-                                  "min-width": "180"
+                                  width: "120"
                                 }
                               }),
                               _vm._v(" "),
@@ -130276,7 +130543,34 @@ var render = function() {
                                   sortable: "",
                                   prop: "calories",
                                   label: "Calories",
-                                  "min-width": "180"
+                                  width: "100"
+                                }
+                              }),
+                              _vm._v(" "),
+                              _c("el-table-column", {
+                                attrs: {
+                                  sortable: "",
+                                  prop: "carb",
+                                  label: "Carb (g)",
+                                  width: "100"
+                                }
+                              }),
+                              _vm._v(" "),
+                              _c("el-table-column", {
+                                attrs: {
+                                  sortable: "",
+                                  prop: "fat",
+                                  label: "Fat (g)",
+                                  width: "100"
+                                }
+                              }),
+                              _vm._v(" "),
+                              _c("el-table-column", {
+                                attrs: {
+                                  sortable: "",
+                                  prop: "protein",
+                                  label: "Protein (g)",
+                                  width: "110"
                                 }
                               }),
                               _vm._v(" "),
@@ -130494,6 +130788,15 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 var URL = '/profile/';
 /* harmony default export */ __webpack_exports__["default"] = ({
@@ -130503,6 +130806,7 @@ var URL = '/profile/';
       activity: [],
       formData: this.initFormData(),
       userData: [],
+      summaryData: [],
       formError: '',
       isProcessing: false
     };
@@ -130532,6 +130836,15 @@ var URL = '/profile/';
         _this.activity = response.data.activity;
         _this.formData = response.data.profile[0].profile;
         _this.userData = response.data.profile[0];
+        _this.summaryData = response.data.summary;
+
+        var maintain = _this.formData.maintain_weight;
+        var lose = _this.formData.lose_weight;
+        var lose_fast = _this.formData.lose_weight_fast;
+
+        var maintain_fat_grams = maintain * 0.20 / 9;
+        var maintain_carb_grams = maintain * 0.50 / 4;
+        var maintain_protein_grams = maintain * 0.30 / 4;
       }).catch(function (error) {
         _this.isProcessing = false;
       });
@@ -130579,13 +130892,13 @@ var render = function() {
             "el-col",
             {
               staticStyle: { "margin-bottom": "20px" },
-              attrs: { xs: 24, sm: 16 }
+              attrs: { xs: 24, sm: 12 }
             },
             [
               _c(
                 "el-card",
                 [
-                  _c("h2", [_vm._v(_vm._s(_vm.userData.name) + " - Profile")]),
+                  _c("h2", [_vm._v(_vm._s(_vm.userData.name + " - Profile"))]),
                   _vm._v(" "),
                   _c(
                     "el-form",
@@ -130838,7 +131151,7 @@ var render = function() {
           _vm._v(" "),
           _c(
             "el-col",
-            { attrs: { xs: 24, sm: 8 } },
+            { attrs: { xs: 24, sm: 12 } },
             [
               _c(
                 "el-card",
@@ -130856,26 +131169,37 @@ var render = function() {
                 [
                   _c("h2", [_vm._v("Summary")]),
                   _vm._v(" "),
-                  _c("p", [
-                    _vm._v("BMR: "),
-                    _c("b", [_vm._v(_vm._s(_vm.formData.bmr))])
-                  ]),
-                  _vm._v(" "),
-                  _c("p", [
-                    _vm._v("Maintain Weight: "),
-                    _c("b", [_vm._v(_vm._s(_vm.formData.maintain_weight))])
-                  ]),
-                  _vm._v(" "),
-                  _c("p", [
-                    _vm._v("Lose Weight: "),
-                    _c("b", [_vm._v(_vm._s(_vm.formData.lose_weight))])
-                  ]),
-                  _vm._v(" "),
-                  _c("p", [
-                    _vm._v("Lose Weight Fast: "),
-                    _c("b", [_vm._v(_vm._s(_vm.formData.lose_weight_fast))])
-                  ])
-                ]
+                  _c(
+                    "el-table",
+                    {
+                      staticStyle: { width: "100%" },
+                      attrs: { data: _vm.summaryData }
+                    },
+                    [
+                      _c("el-table-column", {
+                        attrs: { prop: "target", label: "Target" }
+                      }),
+                      _vm._v(" "),
+                      _c("el-table-column", {
+                        attrs: { prop: "calories", label: "Calories" }
+                      }),
+                      _vm._v(" "),
+                      _c("el-table-column", {
+                        attrs: { prop: "carb", label: "50% Carbs (g)" }
+                      }),
+                      _vm._v(" "),
+                      _c("el-table-column", {
+                        attrs: { prop: "protein", label: "30% Protein (g)" }
+                      }),
+                      _vm._v(" "),
+                      _c("el-table-column", {
+                        attrs: { prop: "fat", label: "20% Fat (g)" }
+                      })
+                    ],
+                    1
+                  )
+                ],
+                1
               )
             ],
             1
@@ -131167,7 +131491,6 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
-//
 
 /* harmony default export */ __webpack_exports__["default"] = ({});
 
@@ -131203,7 +131526,7 @@ var render = function() {
                 }
               }
             },
-            [_vm._v("FOOD DIARY")]
+            [_vm._v("Food Diary")]
           ),
           _vm._v(" "),
           _c(
@@ -131216,7 +131539,7 @@ var render = function() {
                 }
               }
             },
-            [_vm._v("FOOD LIST")]
+            [_vm._v("Food List")]
           ),
           _vm._v(" "),
           _c(
@@ -131239,19 +131562,20 @@ var render = function() {
                     }
                   }
                 },
-                [_vm._v("PROFILE")]
+                [_vm._v("My Profile")]
               ),
               _vm._v(" "),
               _c(
                 "el-menu-item",
                 {
+                  staticStyle: { color: "red" },
                   on: {
                     click: function($event) {
                       return _vm.$root.linkTo("/logout")
                     }
                   }
                 },
-                [_vm._v("LOGOUT")]
+                [_vm._v("Logout")]
               )
             ],
             2
@@ -131441,6 +131765,25 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 var URL = '/food-list/';
 /* harmony default export */ __webpack_exports__["default"] = ({
@@ -131461,6 +131804,9 @@ var URL = '/food-list/';
         food: '',
         serving_size: '',
         calories: '',
+        carb: '',
+        fat: '',
+        protein: '',
         profile_id: ''
       };
     },
@@ -131560,7 +131906,7 @@ var render = function() {
             [
               _c(
                 "el-col",
-                { attrs: { span: 24 } },
+                { attrs: { span: 12 } },
                 [
                   _c(
                     "el-form-item",
@@ -131584,8 +131930,15 @@ var render = function() {
                       })
                     ],
                     1
-                  ),
-                  _vm._v(" "),
+                  )
+                ],
+                1
+              ),
+              _vm._v(" "),
+              _c(
+                "el-col",
+                { attrs: { span: 12 } },
+                [
                   _c(
                     "el-form-item",
                     {
@@ -131608,8 +131961,15 @@ var render = function() {
                       })
                     ],
                     1
-                  ),
-                  _vm._v(" "),
+                  )
+                ],
+                1
+              ),
+              _vm._v(" "),
+              _c(
+                "el-col",
+                { attrs: { span: 6 } },
+                [
                   _c(
                     "el-form-item",
                     {
@@ -131628,6 +131988,99 @@ var render = function() {
                             _vm.$set(_vm.formData, "calories", $$v)
                           },
                           expression: "formData.calories"
+                        }
+                      })
+                    ],
+                    1
+                  )
+                ],
+                1
+              ),
+              _vm._v(" "),
+              _c(
+                "el-col",
+                { attrs: { span: 6 } },
+                [
+                  _c(
+                    "el-form-item",
+                    {
+                      attrs: {
+                        label: "Carb (g)",
+                        required: "",
+                        error: _vm.formError.carb
+                      }
+                    },
+                    [
+                      _c("el-input", {
+                        attrs: { type: "text" },
+                        model: {
+                          value: _vm.formData.carb,
+                          callback: function($$v) {
+                            _vm.$set(_vm.formData, "carb", $$v)
+                          },
+                          expression: "formData.carb"
+                        }
+                      })
+                    ],
+                    1
+                  )
+                ],
+                1
+              ),
+              _vm._v(" "),
+              _c(
+                "el-col",
+                { attrs: { span: 6 } },
+                [
+                  _c(
+                    "el-form-item",
+                    {
+                      attrs: {
+                        label: "Fat (g)",
+                        required: "",
+                        error: _vm.formError.fat
+                      }
+                    },
+                    [
+                      _c("el-input", {
+                        attrs: { type: "text" },
+                        model: {
+                          value: _vm.formData.fat,
+                          callback: function($$v) {
+                            _vm.$set(_vm.formData, "fat", $$v)
+                          },
+                          expression: "formData.fat"
+                        }
+                      })
+                    ],
+                    1
+                  )
+                ],
+                1
+              ),
+              _vm._v(" "),
+              _c(
+                "el-col",
+                { attrs: { span: 6 } },
+                [
+                  _c(
+                    "el-form-item",
+                    {
+                      attrs: {
+                        label: "Protein (g)",
+                        required: "",
+                        error: _vm.formError.protein
+                      }
+                    },
+                    [
+                      _c("el-input", {
+                        attrs: { type: "text" },
+                        model: {
+                          value: _vm.formData.protein,
+                          callback: function($$v) {
+                            _vm.$set(_vm.formData, "protein", $$v)
+                          },
+                          expression: "formData.protein"
                         }
                       })
                     ],

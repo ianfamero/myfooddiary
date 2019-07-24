@@ -19,6 +19,9 @@ class CreateFoodListsTable extends Migration
             $table->string('food');
             $table->string('serving_size');
             $table->integer('calories');
+            $table->double('carb');
+            $table->double('protein');
+            $table->double('fat');
             $table->timestamps();
         });
     }

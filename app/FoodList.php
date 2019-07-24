@@ -18,6 +18,9 @@ class FoodList extends Authenticatable
         'food', 
         'serving_size', 
         'calories',
+        'carb',
+        'protein',
+        'fat',
         'profile_id'
     ];
 

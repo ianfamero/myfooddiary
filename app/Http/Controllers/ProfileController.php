@@ -19,9 +19,29 @@ class ProfileController extends Controller
       $genders = Gender::all();
       $activity = Activity::all();
       $profile = User::with('profile')->where('profile_id', $user['profile_id'])->get();
-      // $profile = Profile::where('id', $user['profile_id'])->get();
+      $summary[0] = [
+        "target" => "Maintain Weight",
+        "calories" => $profile[0]->profile->maintain_weight, 
+        "carb" => round(($profile[0]->profile->maintain_weight * 0.50) / 4), 
+        "protein" => round(($profile[0]->profile->maintain_weight * 0.30) / 4), 
+        "fat" => round(($profile[0]->profile->maintain_weight * 0.20) / 9), 
+      ];
+      $summary[1] = [
+        "target" => "Lose Weight",
+        "calories" => $profile[0]->profile->lose_weight, 
+        "carb" => round(($profile[0]->profile->lose_weight * 0.50) / 4), 
+        "protein" => round(($profile[0]->profile->lose_weight * 0.30) / 4), 
+        "fat" => round(($profile[0]->profile->lose_weight * 0.20) / 9), 
+      ];
+      $summary[2] = [
+        "target" => "Lose Weight Fast",
+        "calories" => $profile[0]->profile->lose_weight_fast, 
+        "carb" => round(($profile[0]->profile->lose_weight_fast * 0.50) / 4), 
+        "protein" => round(($profile[0]->profile->lose_weight_fast * 0.30) / 4), 
+        "fat" => round(($profile[0]->profile->lose_weight_fast * 0.20) / 9), 
+      ];
 
-      return compact('genders', 'activity', 'profile');
+      return compact('genders', 'activity', 'profile', 'summary');
     }
     catch(\Exception $ex) {
       return response(['message' => $ex->getMessage()], 500);

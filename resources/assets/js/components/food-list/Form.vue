@@ -3,15 +3,34 @@
     :show-close="false" :modal-append-to-body="false" top="1em" width="50%" :close-on-press-escape="false">
     <el-form label-position="top" v-loading="isProcessing" element-loading-text="Processing ...">
       <el-row :gutter="20">
-        <el-col :span="24">
+        <el-col :span="12">
           <el-form-item label="Food" required :error="formError.food">
             <el-input type="text" v-model="formData.food"></el-input>
           </el-form-item>
+        </el-col>
+        <el-col :span="12">
           <el-form-item label="Serving Size" required :error="formError.serving_size">
             <el-input type="text" v-model="formData.serving_size"></el-input>
           </el-form-item>
+        </el-col>
+        <el-col :span="6">
           <el-form-item label="Calories" required :error="formError.calories">
             <el-input type="text" v-model="formData.calories"></el-input>
+          </el-form-item>
+        </el-col>
+        <el-col :span="6">
+          <el-form-item label="Carb (g)" required :error="formError.carb">
+            <el-input type="text" v-model="formData.carb"></el-input>
+          </el-form-item>
+        </el-col>
+        <el-col :span="6">
+          <el-form-item label="Fat (g)" required :error="formError.fat">
+            <el-input type="text" v-model="formData.fat"></el-input>
+          </el-form-item>
+        </el-col>
+        <el-col :span="6">
+          <el-form-item label="Protein (g)" required :error="formError.protein">
+            <el-input type="text" v-model="formData.protein"></el-input>
           </el-form-item>
         </el-col>
       </el-row>
@@ -44,6 +63,9 @@
           food: '',
           serving_size: '',
           calories: '',
+          carb: '',
+          fat: '',
+          protein: '',
           profile_id: '',
         }
       },

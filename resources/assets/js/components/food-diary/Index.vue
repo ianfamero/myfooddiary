@@ -1,41 +1,69 @@
 <template>
   <div>
     <el-row :gutter="20">
-      <el-col :xs="24" :sm="8" style="margin-bottom: 20px">
+      <el-col :xs="24" :sm="7" style="margin-bottom: 20px">
         <el-card>
           <el-form label-position="top" v-loading="isProcessing" element-loading-text="Loading ...">
-            <el-form-item label="Date" :error="formError.date" required>
-            <el-date-picker type="date" placeholder="Date" format="MMMM d, yyyy" value-format="yyyy/MM/dd"
-                v-model="formData.date" :clearable="false" style="width: 100%;" @change="getDatas"></el-date-picker>
-          </el-form-item>
-          <el-form-item label="Meal Type" required :error="formError.meal_type_id">
-            <el-select v-model="formData.meal_type_id" placeholder="Select" filterable style="width: 100%">
-              <el-option v-for="meal in meal_types" :key="meal.id" :label="meal.meal_type" :value="meal.id">
-              </el-option>
-            </el-select>
-          </el-form-item>
-          <el-form-item label="Food" required :error="formError.food_list_id">
-            <el-select v-model="formData.food_list_id" placeholder="Select" filterable style="width: 100%">
-              <el-option v-for="food in food_list" :key="food.id" :label="food.food + ' (' + food.calories + ' calories)'" :value="food.id">
-              </el-option>
-            </el-select>
-          </el-form-item>
+          <el-row :gutter="20">
+            <el-col :span="12">
+              <el-form-item label="Date" :error="formError.date" required>
+                <el-date-picker type="date" placeholder="Date" format="MMMM d, yyyy" value-format="yyyy/MM/dd"
+                    v-model="formData.date" :clearable="false" style="width: 100%;" @change="getDatas"></el-date-picker>
+              </el-form-item>
+            </el-col>
+            <el-col :span="12">
+              <el-form-item label="Meal Type" required :error="formError.meal_type_id">
+                <el-select v-model="formData.meal_type_id" placeholder="Select" filterable style="width: 100%">
+                  <el-option v-for="meal in meal_types" :key="meal.id" :label="meal.meal_type" :value="meal.id">
+                  </el-option>
+                </el-select>
+              </el-form-item>
+            </el-col>
+            <el-col :span="24">
+              <el-form-item label="Food" required :error="formError.food_list_id">
+                <el-select v-model="formData.food_list_id" placeholder="Select" filterable style="width: 100%">
+                  <el-option v-for="food in food_list" :key="food.id" :label="food.food + ' with ' + food.calories + ' calories (' + food.carb + 'g carbs, ' + food.fat + 'g fat, ' + food.protein + 'g protein) in ' + food.serving_size" :value="food.id">
+                  </el-option>
+                </el-select>
+              </el-form-item>
+            </el-col>
+          </el-row>
           <el-button type="primary" @click="submitForm"><i class="fa fa-plus"></i> Add</el-button>
           </el-form>
         </el-card><br>
         <el-card>
-          <p>Maintain Weight: <b>{{ total_calories_today }} / {{ profile[0].maintain_weight }}</b></p>
-          <p>Lose Weight: <b>{{ total_calories_today }} / {{ profile[0].lose_weight }}</b></p>
-          <p>Lose Weight Fast: <b>{{ total_calories_today }} / {{ profile[0].lose_weight_fast }}</b></p>
+          <h3>Lose Weight Fast:</h3>
+          Calories: {{ total_calories_today }} / {{ profile[0].lose_weight_fast }}<br>
+          Carbohydrates: {{ total_carb_today }} / {{ Math.round((profile[0].lose_weight_fast * 0.50) / 4) }}<br>
+          Fat: {{ total_fat_today }} / {{ Math.round((profile[0].lose_weight_fast * 0.20) / 9) }}<br>
+          Protein: {{ total_protein_today }} / {{ Math.round((profile[0].lose_weight_fast * 0.30) / 4) }}<br>
+
+          <h3>Lose Weight:</h3>
+          Calories: {{ total_calories_today }} / {{ profile[0].lose_weight }}<br>
+          Carbohydrates: {{ total_carb_today }} / {{ Math.round((profile[0].lose_weight * 0.50) / 4) }}<br>
+          Fat: {{ total_fat_today }} / {{ Math.round((profile[0].lose_weight * 0.20) / 9) }}<br>
+          Protein: {{ total_protein_today }} / {{ Math.round((profile[0].lose_weight * 0.30) / 4) }}<br>
+
+          <h3>Maintain Weight:</h3>
+          Calories: {{ total_calories_today }} / {{ profile[0].maintain_weight }}<br>
+          Carbohydrates: {{ total_carb_today }} / {{ Math.round((profile[0].maintain_weight * 0.50) / 4) }}<br>
+          Fat: {{ total_fat_today }} / {{ Math.round((profile[0].maintain_weight * 0.20) / 9) }}<br>
+          Protein: {{ total_protein_today }} / {{ Math.round((profile[0].maintain_weight * 0.30) / 4) }}<br>
         </el-card>
       </el-col>
-      <el-col :xs="24" :sm="16">
+      <el-col :xs="24" :sm="17">
+        <!-- <el-card v-loading="isProcessing" element-loading-text="Loading ...">
+
+        </el-card> -->
         <el-card v-loading="isProcessing" element-loading-text="Loading ...">
           <div class="table-header"><b>BREAKFAST</b></div>
-          <el-table :data="food_intake[0]" border stripe>
-            <el-table-column sortable prop="food_list.food" label="Food" min-width="180"></el-table-column>
-            <el-table-column sortable prop="food_list.serving_size" label="Serving Size" min-width="180"></el-table-column>
-            <el-table-column sortable prop="food_list.calories" label="Calories" min-width="180"></el-table-column>
+          <el-table :data="food_intake[0]" border stripe :default-sort="{prop: 'food_list.food', order: 'ascending'}">
+            <el-table-column sortable prop="food_list.food" label="Food" min-width="250"></el-table-column>
+            <el-table-column sortable prop="food_list.serving_size" label="Serving Size" width="120"></el-table-column>
+            <el-table-column sortable prop="food_list.calories" label="Calories" width="100"></el-table-column>
+            <el-table-column sortable prop="food_list.carb" label="Carb (g)" width="100"></el-table-column>
+            <el-table-column sortable prop="food_list.fat" label="Fat (g)" width="100"></el-table-column>
+            <el-table-column sortable prop="food_list.protein" label="Protein (g)" width="110"></el-table-column>
             <el-table-column width="80" fixed="right">
               <template slot-scope="scope">
                 <el-button type="danger" @click.native="toDestroy(scope.row.id, scope.row.food_list.food, false, 0)"><i class="fa fa-trash-o"></i></el-button>
@@ -43,10 +71,13 @@
             </el-table-column>
           </el-table>
           <div class="table-header"><b>LUNCH</b></div>
-          <el-table :data="food_intake[1]" border stripe>
-            <el-table-column sortable prop="food_list.food" label="Food" min-width="180"></el-table-column>
-            <el-table-column sortable prop="food_list.serving_size" label="Serving Size" min-width="180"></el-table-column>
-            <el-table-column sortable prop="food_list.calories" label="Calories" min-width="180"></el-table-column>
+          <el-table :data="food_intake[1]" border stripe :default-sort="{prop: 'food_list.food', order: 'ascending'}">
+            <el-table-column sortable prop="food_list.food" label="Food" min-width="250"></el-table-column>
+            <el-table-column sortable prop="food_list.serving_size" label="Serving Size" width="120"></el-table-column>
+            <el-table-column sortable prop="food_list.calories" label="Calories" width="100"></el-table-column>
+            <el-table-column sortable prop="food_list.carb" label="Carb (g)" width="100"></el-table-column>
+            <el-table-column sortable prop="food_list.fat" label="Fat (g)" width="100"></el-table-column>
+            <el-table-column sortable prop="food_list.protein" label="Protein (g)" width="110"></el-table-column>
             <el-table-column width="80" fixed="right">
               <template slot-scope="scope">
                 <el-button type="danger" @click.native="toDestroy(scope.row.id, scope.row.food_list.food, false, 1)"><i class="fa fa-trash-o"></i></el-button>
@@ -54,10 +85,13 @@
             </el-table-column>
           </el-table>
           <div class="table-header"><b>DINNER</b></div>
-          <el-table :data="food_intake[2]" border stripe>
-            <el-table-column sortable prop="food_list.food" label="Food" min-width="180"></el-table-column>
-            <el-table-column sortable prop="food_list.serving_size" label="Serving Size" min-width="180"></el-table-column>
-            <el-table-column sortable prop="food_list.calories" label="Calories" min-width="180"></el-table-column>
+          <el-table :data="food_intake[2]" border stripe :default-sort="{prop: 'food_list.food', order: 'ascending'}">
+            <el-table-column sortable prop="food_list.food" label="Food" min-width="250"></el-table-column>
+            <el-table-column sortable prop="food_list.serving_size" label="Serving Size" width="120"></el-table-column>
+            <el-table-column sortable prop="food_list.calories" label="Calories" width="100"></el-table-column>
+            <el-table-column sortable prop="food_list.carb" label="Carb (g)" width="100"></el-table-column>
+            <el-table-column sortable prop="food_list.fat" label="Fat (g)" width="100"></el-table-column>
+            <el-table-column sortable prop="food_list.protein" label="Protein (g)" width="110"></el-table-column>
             <el-table-column width="80" fixed="right">
               <template slot-scope="scope">
                 <el-button type="danger" @click.native="toDestroy(scope.row.id, scope.row.food_list.food, false, 2)"><i class="fa fa-trash-o"></i></el-button>
@@ -65,10 +99,13 @@
             </el-table-column>
           </el-table>
           <div class="table-header"><b>SNACK</b></div>
-          <el-table :data="food_intake[3]" border stripe>
-            <el-table-column sortable prop="food_list.food" label="Food" min-width="180"></el-table-column>
-            <el-table-column sortable prop="food_list.serving_size" label="Serving Size" min-width="180"></el-table-column>
-            <el-table-column sortable prop="food_list.calories" label="Calories" min-width="180"></el-table-column>
+          <el-table :data="food_intake[3]" border stripe :default-sort="{prop: 'food_list.food', order: 'ascending'}">
+            <el-table-column sortable prop="food_list.food" label="Food" min-width="250"></el-table-column>
+            <el-table-column sortable prop="food_list.serving_size" label="Serving Size" width="120"></el-table-column>
+            <el-table-column sortable prop="food_list.calories" label="Calories" width="100"></el-table-column>
+            <el-table-column sortable prop="food_list.carb" label="Carb (g)" width="100"></el-table-column>
+            <el-table-column sortable prop="food_list.fat" label="Fat (g)" width="100"></el-table-column>
+            <el-table-column sortable prop="food_list.protein" label="Protein (g)" width="110"></el-table-column>
             <el-table-column width="80" fixed="right">
               <template slot-scope="scope">
                 <el-button type="danger" @click.native="toDestroy(scope.row.id, scope.row.food_list.food, false, 3)"><i class="fa fa-trash-o"></i></el-button>
@@ -125,6 +162,9 @@
           this.food_list = response.data.food_list;
           this.food_intake = response.data.food_intake;
           this.total_calories_today = response.data.total_calories_today;
+          this.total_carb_today = response.data.total_carb_today;
+          this.total_fat_today = response.data.total_fat_today;
+          this.total_protein_today = response.data.total_protein_today;
           this.profile = response.data.profile;
           this.isProcessing = false;
         }).catch(error => {

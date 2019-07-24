@@ -29,6 +29,9 @@ class FoodListRequest extends FormRequest
             'food' => 'required',  
             'serving_size' => 'required',
             'calories' => 'required|integer',
+            'carb' => 'required|numeric',
+            'protein' => 'required|numeric',
+            'fat' => 'required|numeric',
         ];
     }
 

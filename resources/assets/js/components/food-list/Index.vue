@@ -26,11 +26,14 @@
             </div>
             <el-row class="mb-15">
               <el-table :data="paginatedFoodList" border stripe empty-text="No Data Found" v-loading="isProcessing" 
-              @sort-change="handleSortChange" element-loading-text="Loading ..." @selection-change="handleSelectionChange" style="width: 100%">
+              @sort-change="handleSortChange" :default-sort="{prop: 'food', order: 'ascending'}" element-loading-text="Loading ..." @selection-change="handleSelectionChange" style="width: 100%">
                 <el-table-column sortable type="selection" width="45"></el-table-column>
-                <el-table-column sortable prop="food" label="Food" min-width="180"></el-table-column>
-                <el-table-column sortable prop="serving_size" label="Serving Size" min-width="180"></el-table-column>
-                <el-table-column sortable prop="calories" label="Calories" min-width="180"></el-table-column>
+                <el-table-column sortable prop="food" label="Food" min-width="250"></el-table-column>
+                <el-table-column sortable prop="serving_size" label="Serving Size" width="120"></el-table-column>
+                <el-table-column sortable prop="calories" label="Calories" width="100"></el-table-column>
+                <el-table-column sortable prop="carb" label="Carb (g)" width="100"></el-table-column>
+                <el-table-column sortable prop="fat" label="Fat (g)" width="100"></el-table-column>
+                <el-table-column sortable prop="protein" label="Protein (g)" width="110"></el-table-column>
                 <el-table-column width="120" fixed="right">
                   <template slot-scope="scope">
                     <el-dropdown trigger="click">

@@ -38,9 +38,9 @@
                 <el-form-item label="Password" required :error="registerFormError.password">
                   <el-input type="password" v-model="registerFormData.password"></el-input>
                 </el-form-item>
-                <el-form-item>
-                  <el-checkbox v-model="iAccept">I accept the <a href="#">Terms of Service</a></el-checkbox>
-                </el-form-item>
+                <!-- <el-form-item>
+                  <el-checkbox v-model="iAccept" @change="onAccept">I accept the <a href="#">Terms of Service</a></el-checkbox>
+                </el-form-item> -->
                 <vue-recaptcha sitekey="6Lcq66wUAAAAAPxRNPGh25Y4Dx8B4BU-FIc0VjUt" @verify="onCaptchaVerified"></vue-recaptcha><br>
                 <el-button type="primary" @click="submitRegisterForm" :disabled="btnDisabled">Register</el-button>
               </el-form>
@@ -117,8 +117,8 @@
         })
       },
       onCaptchaVerified: function () {
-      this.btnDisabled = false;
-    },
+        this.btnDisabled = false;
+      },
     }
   }
 </script>

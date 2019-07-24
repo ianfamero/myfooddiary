@@ -1,9 +1,9 @@
 <template>
   <div>
     <el-row :gutter="20">
-      <el-col :xs="24" :sm="16" style="margin-bottom: 20px">
+      <el-col :xs="24" :sm="12" style="margin-bottom: 20px">
         <el-card>
-          <h2>{{ userData.name }} - Profile</h2>
+          <h2>{{ userData.name + " - Profile" }}</h2>
           <el-form label-position="top" v-loading="isProcessing" element-loading-text="Loading ...">
             <el-row :gutter="20">
               <el-col :span="12">
@@ -44,13 +44,22 @@
           </el-form>
         </el-card>
       </el-col>
-      <el-col :xs="24" :sm="8">
+      <el-col :xs="24" :sm="12">
         <el-card v-loading="isProcessing" element-loading-text="Loading ...">
           <h2>Summary</h2>
-          <p>BMR: <b>{{ formData.bmr }}</b></p>
+          <!-- <p>BMR: <b>{{ formData.bmr }}</b></p>
           <p>Maintain Weight: <b>{{ formData.maintain_weight }}</b></p>
           <p>Lose Weight: <b>{{ formData.lose_weight }}</b></p>
-          <p>Lose Weight Fast: <b>{{ formData.lose_weight_fast }}</b></p>
+          <p>Lose Weight Fast: <b>{{ formData.lose_weight_fast }}</b></p> -->
+
+          <el-table :data="summaryData" style="width: 100%">
+            <el-table-column prop="target" label="Target"> </el-table-column>
+            <el-table-column prop="calories" label="Calories"> </el-table-column>
+            <el-table-column prop="carb" label="50% Carbs (g)"> </el-table-column>
+            <el-table-column prop="protein" label="30% Protein (g)"> </el-table-column>
+            <el-table-column prop="fat" label="20% Fat (g)"> </el-table-column>
+          </el-table>
+
         </el-card>
       </el-col>
     </el-row>
@@ -66,6 +75,7 @@
         activity: [],
         formData: this.initFormData(),
         userData: [],
+        summaryData: [],
         formError: '',
         isProcessing: false,
       }
@@ -93,6 +103,18 @@
           this.activity = response.data.activity;
           this.formData = response.data.profile[0].profile;
           this.userData = response.data.profile[0];
+          this.summaryData = response.data.summary;
+
+          var maintain = this.formData.maintain_weight;
+          var lose = this.formData.lose_weight;
+          var lose_fast = this.formData.lose_weight_fast;
+
+          var maintain_fat_grams = (maintain * 0.20) / 9;
+          var maintain_carb_grams = (maintain * 0.50) / 4;
+          var maintain_protein_grams = (maintain * 0.30) / 4;
+
+
+
         }).catch(error => {
           this.isProcessing = false;
         });

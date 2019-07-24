@@ -52,10 +52,36 @@ class FoodDiaryController extends Controller
       ->where('a.profile_id', $user['profile_id'])
       ->sum('calories');
 
+      $total_carb_today = DB::table('user_food_intakes as a')
+      ->leftJoin('food_lists as b', 'a.food_list_id', 'b.id')
+      ->where('date', $data['date'])
+      ->where('a.profile_id', $user['profile_id'])
+      ->sum('carb');
+
+      $total_fat_today = DB::table('user_food_intakes as a')
+      ->leftJoin('food_lists as b', 'a.food_list_id', 'b.id')
+      ->where('date', $data['date'])
+      ->where('a.profile_id', $user['profile_id'])
+      ->sum('fat');
+
+      $total_protein_today = DB::table('user_food_intakes as a')
+      ->leftJoin('food_lists as b', 'a.food_list_id', 'b.id')
+      ->where('date', $data['date'])
+      ->where('a.profile_id', $user['profile_id'])
+      ->sum('protein');
+
       $profile = Profile::where('id', $user['profile_id'])->get();
 
       $food_intake = array($breakfast, $lunch, $dinner, $snack);
-      return compact('meal_types', 'food_list', 'food_intake', 'total_calories_today', 'profile');   
+      return compact(
+        'meal_types', 
+        'food_list', 
+        'food_intake', 
+        'total_calories_today', 
+        'total_carb_today', 
+        'total_fat_today', 
+        'total_protein_today', 
+        'profile');   
     }
     catch(\Exception $ex) {
       return response(['message' => $ex->getMessage()], 500);
