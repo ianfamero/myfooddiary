@@ -9,6 +9,7 @@
       <el-submenu>
         <template slot="title"><i class="fa fa-2x fa-user-circle" style="color: #fff"></i></template>
         <el-menu-item index="/profile" @click="$root.moveTo('/profile')">My Profile</el-menu-item>
+        <el-menu-item index="/report" @click="$root.moveTo('/report')">Reports</el-menu-item>
         <el-menu-item @click="$root.linkTo('/logout')" style="color: red">Logout</el-menu-item>
       </el-submenu>
     </el-menu>

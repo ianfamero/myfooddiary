@@ -17,6 +17,10 @@ let routes = [
     path: '/profile',
     component: require('./components/profile/Index.vue'),
   },
+  {
+    path: '/report',
+    component: require('./components/report/Index.vue'),
+  },
 ];
 
 export default new VueRouter({

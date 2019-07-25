@@ -11,6 +11,8 @@ use App\User;
 use DB;
 use Auth;
 
+use App\Http\Requests\FoodDiaryRequest;
+
 class FoodDiaryController extends Controller
 {
   public function getDatas(Request $request) {
@@ -87,7 +89,7 @@ class FoodDiaryController extends Controller
       return response(['message' => $ex->getMessage()], 500);
     }
   }
-  public function add(Request $request) {
+  public function add(FoodDiaryRequest $request) {
     try {
       $user = Auth::user();
       $inputs = $request->all();

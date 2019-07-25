@@ -32,10 +32,20 @@ Vue.component('vue-recaptcha', VueRecaptcha);
 Vue.component('user-login', require('./components/Login.vue'));
 Vue.component('top-header', require('./components/common/Header.vue'));
 Vue.component('login-header', require('./components/common/LoginHeader.vue'));
-Vue.component('food-diary', require('./components/food-diary/Index.vue'));
-Vue.component('food-list', require('./components/food-list/Index.vue'));
 Vue.component('food-list-form-modal', require('./components/food-list/Form.vue'));
-Vue.component('profile', require('./components/profile/Index.vue'));
+// Vue.component('food-diary', require('./components/food-diary/Index.vue'));
+// Vue.component('food-list', require('./components/food-list/Index.vue'));
+// Vue.component('profile', require('./components/profile/Index.vue'));
+// Vue.component('report', require('./components/report/Index.vue'));
+
+
+Vue.filter('dateFormat', function (date) {
+  if (!date) {
+    return '';
+  }
+  return moment(new Date(date)).format("MMMM D, YYYY");
+});
+
 
 const app = new Vue({
   el: '#app',

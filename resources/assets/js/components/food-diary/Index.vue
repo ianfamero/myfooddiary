@@ -3,7 +3,7 @@
     <el-row :gutter="20">
       <el-col :xs="24" :sm="7" style="margin-bottom: 20px">
         <el-card>
-          <el-form label-position="top" v-loading="isProcessing" element-loading-text="Loading ...">
+          <el-form label-position="top">
           <el-row :gutter="20">
             <el-col :span="12">
               <el-form-item label="Date" :error="formError.date" required>
@@ -22,7 +22,7 @@
             <el-col :span="24">
               <el-form-item label="Food" required :error="formError.food_list_id">
                 <el-select v-model="formData.food_list_id" placeholder="Select" filterable style="width: 100%">
-                  <el-option v-for="food in food_list" :key="food.id" :label="food.food + ' with ' + food.calories + ' calories (' + food.carb + 'g carbs, ' + food.fat + 'g fat, ' + food.protein + 'g protein) in ' + food.serving_size" :value="food.id">
+                  <el-option v-for="food in sortFoods(food_list)" :key="food.id" :label="food.food + ' with ' + food.calories + ' calories (' + food.carb + 'g carbs, ' + food.fat + 'g fat, ' + food.protein + 'g protein) in ' + food.serving_size" :value="food.id">
                   </el-option>
                 </el-select>
               </el-form-item>
@@ -61,9 +61,21 @@
             <el-table-column sortable prop="food_list.food" label="Food" min-width="250"></el-table-column>
             <el-table-column sortable prop="food_list.serving_size" label="Serving Size" width="120"></el-table-column>
             <el-table-column sortable prop="food_list.calories" label="Calories" width="100"></el-table-column>
-            <el-table-column sortable prop="food_list.carb" label="Carb (g)" width="100"></el-table-column>
-            <el-table-column sortable prop="food_list.fat" label="Fat (g)" width="100"></el-table-column>
-            <el-table-column sortable prop="food_list.protein" label="Protein (g)" width="110"></el-table-column>
+            <el-table-column sortable prop="food_list.carb" label="Carb (g)" width="100">
+              <template slot-scope="scope">
+                {{ scope.row.food_list.carb + ' g' }}
+              </template>
+            </el-table-column>
+            <el-table-column sortable prop="food_list.fat" label="Fat (g)" width="100">
+              <template slot-scope="scope">
+                {{ scope.row.food_list.fat + ' g' }}
+              </template>
+            </el-table-column>
+            <el-table-column sortable prop="food_list.protein" label="Protein (g)" width="110">
+              <template slot-scope="scope">
+                {{ scope.row.food_list.protein + ' g' }}
+              </template>
+            </el-table-column>
             <el-table-column width="80" fixed="right">
               <template slot-scope="scope">
                 <el-button type="danger" @click.native="toDestroy(scope.row.id, scope.row.food_list.food, false, 0)"><i class="fa fa-trash-o"></i></el-button>
@@ -75,9 +87,21 @@
             <el-table-column sortable prop="food_list.food" label="Food" min-width="250"></el-table-column>
             <el-table-column sortable prop="food_list.serving_size" label="Serving Size" width="120"></el-table-column>
             <el-table-column sortable prop="food_list.calories" label="Calories" width="100"></el-table-column>
-            <el-table-column sortable prop="food_list.carb" label="Carb (g)" width="100"></el-table-column>
-            <el-table-column sortable prop="food_list.fat" label="Fat (g)" width="100"></el-table-column>
-            <el-table-column sortable prop="food_list.protein" label="Protein (g)" width="110"></el-table-column>
+            <el-table-column sortable prop="food_list.carb" label="Carb (g)" width="100">
+              <template slot-scope="scope">
+                {{ scope.row.food_list.carb + ' g' }}
+              </template>
+            </el-table-column>
+            <el-table-column sortable prop="food_list.fat" label="Fat (g)" width="100">
+              <template slot-scope="scope">
+                {{ scope.row.food_list.fat + ' g' }}
+              </template>
+            </el-table-column>
+            <el-table-column sortable prop="food_list.protein" label="Protein (g)" width="110">
+              <template slot-scope="scope">
+                {{ scope.row.food_list.protein + ' g' }}
+              </template>
+            </el-table-column>
             <el-table-column width="80" fixed="right">
               <template slot-scope="scope">
                 <el-button type="danger" @click.native="toDestroy(scope.row.id, scope.row.food_list.food, false, 1)"><i class="fa fa-trash-o"></i></el-button>
@@ -89,9 +113,21 @@
             <el-table-column sortable prop="food_list.food" label="Food" min-width="250"></el-table-column>
             <el-table-column sortable prop="food_list.serving_size" label="Serving Size" width="120"></el-table-column>
             <el-table-column sortable prop="food_list.calories" label="Calories" width="100"></el-table-column>
-            <el-table-column sortable prop="food_list.carb" label="Carb (g)" width="100"></el-table-column>
-            <el-table-column sortable prop="food_list.fat" label="Fat (g)" width="100"></el-table-column>
-            <el-table-column sortable prop="food_list.protein" label="Protein (g)" width="110"></el-table-column>
+            <el-table-column sortable prop="food_list.carb" label="Carb (g)" width="100">
+              <template slot-scope="scope">
+                {{ scope.row.food_list.carb + ' g' }}
+              </template>
+            </el-table-column>
+            <el-table-column sortable prop="food_list.fat" label="Fat (g)" width="100">
+              <template slot-scope="scope">
+                {{ scope.row.food_list.fat + ' g' }}
+              </template>
+            </el-table-column>
+            <el-table-column sortable prop="food_list.protein" label="Protein (g)" width="110">
+              <template slot-scope="scope">
+                {{ scope.row.food_list.protein + ' g' }}
+              </template>
+            </el-table-column>
             <el-table-column width="80" fixed="right">
               <template slot-scope="scope">
                 <el-button type="danger" @click.native="toDestroy(scope.row.id, scope.row.food_list.food, false, 2)"><i class="fa fa-trash-o"></i></el-button>
@@ -103,9 +139,21 @@
             <el-table-column sortable prop="food_list.food" label="Food" min-width="250"></el-table-column>
             <el-table-column sortable prop="food_list.serving_size" label="Serving Size" width="120"></el-table-column>
             <el-table-column sortable prop="food_list.calories" label="Calories" width="100"></el-table-column>
-            <el-table-column sortable prop="food_list.carb" label="Carb (g)" width="100"></el-table-column>
-            <el-table-column sortable prop="food_list.fat" label="Fat (g)" width="100"></el-table-column>
-            <el-table-column sortable prop="food_list.protein" label="Protein (g)" width="110"></el-table-column>
+            <el-table-column sortable prop="food_list.carb" label="Carb (g)" width="100">
+              <template slot-scope="scope">
+                {{ scope.row.food_list.carb + ' g' }}
+              </template>
+            </el-table-column>
+            <el-table-column sortable prop="food_list.fat" label="Fat (g)" width="100">
+              <template slot-scope="scope">
+                {{ scope.row.food_list.fat + ' g' }}
+              </template>
+            </el-table-column>
+            <el-table-column sortable prop="food_list.protein" label="Protein (g)" width="110">
+              <template slot-scope="scope">
+                {{ scope.row.food_list.protein + ' g' }}
+              </template>
+            </el-table-column>
             <el-table-column width="80" fixed="right">
               <template slot-scope="scope">
                 <el-button type="danger" @click.native="toDestroy(scope.row.id, scope.row.food_list.food, false, 3)"><i class="fa fa-trash-o"></i></el-button>
@@ -154,6 +202,9 @@
       getDate: function() {
         return moment(new Date()).format("YYYY/MM/DD");
       },
+      sortFoods(arrays) {
+        return _.orderBy(arrays, 'food', 'asc');
+      },
       getDatas: function() {
         this.isProcessing = true;
         axios.post(URL + 'get-datas', this.formData)
@@ -172,11 +223,23 @@
         });
       },
       submitForm: function() {
+        this.isProcessing = true;
         axios.post(URL + 'add', this.formData)
         .then(response => {
           this.getDatas();
+          this.formError = '';
+          this.isProcessing = false;
         }).catch(error => {
-
+          if (error.response.status == 401) {
+            location.reload();
+          }
+          else if (error.response.status == 422) {
+            this.formError = error.response.data;
+          } else {
+            this.$root.showMessage('error', error.response.data.message);
+            this.formError = '';
+          }
+          this.isProcessing = false;
         });
       },
       toDestroy: function (id, code, isMany, tableIndex) {

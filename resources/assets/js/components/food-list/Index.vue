@@ -31,9 +31,21 @@
                 <el-table-column sortable prop="food" label="Food" min-width="250"></el-table-column>
                 <el-table-column sortable prop="serving_size" label="Serving Size" width="120"></el-table-column>
                 <el-table-column sortable prop="calories" label="Calories" width="100"></el-table-column>
-                <el-table-column sortable prop="carb" label="Carb (g)" width="100"></el-table-column>
-                <el-table-column sortable prop="fat" label="Fat (g)" width="100"></el-table-column>
-                <el-table-column sortable prop="protein" label="Protein (g)" width="110"></el-table-column>
+                <el-table-column sortable prop="carb" label="Carb (g)" width="100">
+                  <template slot-scope="scope">
+                    {{ scope.row.carb + ' g' }}
+                  </template>
+                </el-table-column>
+                <el-table-column sortable prop="fat" label="Fat (g)" width="100">
+                  <template slot-scope="scope">
+                    {{ scope.row.fat + ' g' }}
+                  </template>
+                </el-table-column>
+                <el-table-column sortable prop="protein" label="Protein (g)" width="110">
+                  <template slot-scope="scope">
+                    {{ scope.row.protein + ' g' }}
+                  </template>
+                </el-table-column>
                 <el-table-column width="120" fixed="right">
                   <template slot-scope="scope">
                     <el-dropdown trigger="click">

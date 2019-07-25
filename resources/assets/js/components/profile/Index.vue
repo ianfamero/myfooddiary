@@ -53,11 +53,23 @@
           <p>Lose Weight Fast: <b>{{ formData.lose_weight_fast }}</b></p> -->
 
           <el-table :data="summaryData" style="width: 100%">
-            <el-table-column prop="target" label="Target"> </el-table-column>
-            <el-table-column prop="calories" label="Calories"> </el-table-column>
-            <el-table-column prop="carb" label="50% Carbs (g)"> </el-table-column>
-            <el-table-column prop="protein" label="30% Protein (g)"> </el-table-column>
-            <el-table-column prop="fat" label="20% Fat (g)"> </el-table-column>
+            <el-table-column prop="target" label="Target" min-width="130"> </el-table-column>
+            <el-table-column prop="calories" label="Calories" min-width="100"> </el-table-column>
+            <el-table-column prop="carb" label="50% Carbs (g)" min-width="100">
+              <template slot-scope="scope">
+                {{ scope.row.carb + ' g' }}
+              </template>
+            </el-table-column>
+            <el-table-column prop="protein" label="30% Protein (g)" min-width="110"> 
+              <template slot-scope="scope">
+                {{ scope.row.protein + ' g' }}
+              </template>
+            </el-table-column>
+            <el-table-column prop="fat" label="20% Fat (g)" min-width="100">
+              <template slot-scope="scope">
+                {{ scope.row.fat + ' g' }}
+              </template>
+            </el-table-column>
           </el-table>
 
         </el-card>

@@ -17,6 +17,7 @@ Route::post('/login', 'Auth\LoginController@login');
 Route::get('/logout', 'Auth\LoginController@logout');
 
 Route::group(['middleware' => ['auth:web']], function() {
+    
     //PROFILE
     Route::get('/profile/get-datas', 'ProfileController@getDatas');
     Route::post('/profile/save', 'ProfileController@save');
@@ -33,9 +34,8 @@ Route::group(['middleware' => ['auth:web']], function() {
     Route::post('/food-diary/add', 'FoodDiaryController@add');
     Route::get('/food-diary/destroy/{id}', 'FoodDiaryController@destroy');
 
+    //REPORTS
+    Route::post('/report/generate', 'ReportController@generate');
+
     Route::get('/{any}', 'RouterController@index')->where('any', '.*');
 });
-
-// Auth::routes();
-
-// Route::get('/home', 'HomeController@index')->name('home');
