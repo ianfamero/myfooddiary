@@ -33,6 +33,11 @@ $base-color-darker: rgb(0, 81, 139);
   }
 }
 
+@media only screen and (max-width: 800px) {
+  .fw-modal {
+    width:90% !important;
+  }
+}
 
 .table-header {
   background: #f3f3f3;

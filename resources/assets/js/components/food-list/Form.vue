@@ -1,34 +1,34 @@
 <template>
   <el-dialog :title="(formMode == 'store' ? 'New' : 'Update') + ' - Food'" :visible.sync="isShowModal" :close-on-click-modal="false"
-    :show-close="false" :modal-append-to-body="false" top="1em" width="50%" :close-on-press-escape="false">
+    :show-close="false" :modal-append-to-body="false" top="1em" width="50%" custom-class="fw-modal" :close-on-press-escape="false">
     <el-form label-position="top" v-loading="isProcessing" element-loading-text="Processing ...">
       <el-row :gutter="20">
-        <el-col :span="12">
+        <el-col :xs="24" :sm="12">
           <el-form-item label="Food" required :error="formError.food">
             <el-input type="text" v-model="formData.food"></el-input>
           </el-form-item>
         </el-col>
-        <el-col :span="12">
+        <el-col :xs="24" :sm="12">
           <el-form-item label="Serving Size" required :error="formError.serving_size">
             <el-input type="text" v-model="formData.serving_size"></el-input>
           </el-form-item>
         </el-col>
-        <el-col :span="6">
+        <el-col :xs="12" :sm="6">
           <el-form-item label="Calories" required :error="formError.calories">
             <el-input type="text" v-model="formData.calories"></el-input>
           </el-form-item>
         </el-col>
-        <el-col :span="6">
+        <el-col :xs="12" :sm="6">
           <el-form-item label="Carb (g)" required :error="formError.carb">
             <el-input type="text" v-model="formData.carb"></el-input>
           </el-form-item>
         </el-col>
-        <el-col :span="6">
+        <el-col :xs="12" :sm="6">
           <el-form-item label="Fat (g)" required :error="formError.fat">
             <el-input type="text" v-model="formData.fat"></el-input>
           </el-form-item>
         </el-col>
-        <el-col :span="6">
+        <el-col :xs="12" :sm="6">
           <el-form-item label="Protein (g)" required :error="formError.protein">
             <el-input type="text" v-model="formData.protein"></el-input>
           </el-form-item>
