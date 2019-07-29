@@ -31,6 +31,7 @@ class ProfileRequest extends FormRequest
             'height' => 'required|integer',
             'weight' => 'required|integer',
             'activity_id' => 'required',  
+            'diet_type_id' => 'required',  
         ];
     }
 

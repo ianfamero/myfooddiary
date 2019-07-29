@@ -23,7 +23,8 @@ class Profile extends Authenticatable
         'maintain_weight',
         'lose_weight',
         'lose_weight_fast',
-        'bmr'
+        'bmr',
+        'diet_type_id'
     ];
 
     protected $hidden = [
@@ -36,6 +37,9 @@ class Profile extends Authenticatable
     }
     public function activity() {
         return $this->belongsTo('App\Activity');
+    }
+    public function diet() {
+        return $this->belongsTo('App\DietType', 'diet_type_id', 'id');
     }
     public function user() {
         return $this->hasMany('App\User');

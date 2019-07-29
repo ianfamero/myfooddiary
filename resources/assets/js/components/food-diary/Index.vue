@@ -34,21 +34,21 @@
         <el-card>
           <h3>Lose Weight Fast:</h3>
           Calories: {{ total_calories_today }} / {{ profile[0].lose_weight_fast }}<br>
-          Carbohydrates: {{ total_carb_today }} / {{ Math.round((profile[0].lose_weight_fast * 0.50) / 4) }}<br>
-          Fat: {{ total_fat_today }} / {{ Math.round((profile[0].lose_weight_fast * 0.20) / 9) }}<br>
-          Protein: {{ total_protein_today }} / {{ Math.round((profile[0].lose_weight_fast * 0.30) / 4) }}<br>
+          Carb: {{ total_carb_today }} / {{ Math.round((profile[0].lose_weight_fast * percent_macro.carb) / 4) }}<br>
+          Fat: {{ total_fat_today }} / {{ Math.round((profile[0].lose_weight_fast * percent_macro.fat) / 9) }}<br>
+          Protein: {{ total_protein_today }} / {{ Math.round((profile[0].lose_weight_fast * percent_macro.protein) / 4) }}<br>
 
           <h3>Lose Weight:</h3>
           Calories: {{ total_calories_today }} / {{ profile[0].lose_weight }}<br>
-          Carbohydrates: {{ total_carb_today }} / {{ Math.round((profile[0].lose_weight * 0.50) / 4) }}<br>
-          Fat: {{ total_fat_today }} / {{ Math.round((profile[0].lose_weight * 0.20) / 9) }}<br>
-          Protein: {{ total_protein_today }} / {{ Math.round((profile[0].lose_weight * 0.30) / 4) }}<br>
+          Carb: {{ total_carb_today }} / {{ Math.round((profile[0].lose_weight * percent_macro.carb) / 4) }}<br>
+          Fat: {{ total_fat_today }} / {{ Math.round((profile[0].lose_weight * percent_macro.fat) / 9) }}<br>
+          Protein: {{ total_protein_today }} / {{ Math.round((profile[0].lose_weight * percent_macro.protein) / 4) }}<br>
 
           <h3>Maintain Weight:</h3>
           Calories: {{ total_calories_today }} / {{ profile[0].maintain_weight }}<br>
-          Carbohydrates: {{ total_carb_today }} / {{ Math.round((profile[0].maintain_weight * 0.50) / 4) }}<br>
-          Fat: {{ total_fat_today }} / {{ Math.round((profile[0].maintain_weight * 0.20) / 9) }}<br>
-          Protein: {{ total_protein_today }} / {{ Math.round((profile[0].maintain_weight * 0.30) / 4) }}<br>
+          Carb: {{ total_carb_today }} / {{ Math.round((profile[0].maintain_weight * percent_macro.carb) / 4) }}<br>
+          Fat: {{ total_fat_today }} / {{ Math.round((profile[0].maintain_weight * percent_macro.fat) / 9) }}<br>
+          Protein: {{ total_protein_today }} / {{ Math.round((profile[0].maintain_weight * percent_macro.protein) / 4) }}<br>
         </el-card>
       </el-col>
       <el-col :xs="24" :sm="17">
@@ -175,6 +175,11 @@
         food_list: [],
         food_intake: [],
         profile: [],
+        percent_macro: {
+          'carb': '',
+          'fat': '',
+          'protein': '',
+        },
         total_calories_today: 0,
         table_index: '',
         formError: '',
@@ -217,6 +222,11 @@
           this.total_fat_today = response.data.total_fat_today;
           this.total_protein_today = response.data.total_protein_today;
           this.profile = response.data.profile;
+
+          this.percent_macro.carb = response.data.profile[0].diet.percent_carbs / 100;
+          this.percent_macro.fat = response.data.profile[0].diet.percent_fats / 100;
+          this.percent_macro.protein = response.data.profile[0].diet.percent_proteins / 100;
+
           this.isProcessing = false;
         }).catch(error => {
           this.isProcessing = false;
