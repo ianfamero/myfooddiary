@@ -18,5 +18,11 @@
         "laravel-mix": "^2.0",
         "lodash": "^4.17.4",
         "vue": "^2.5.7"
+    },
+    "dependencies": {
+        "element-ui": "^2.10.1",
+        "moment": "^2.24.0",
+        "vue-recaptcha": "^1.2.0",
+        "vue-router": "^3.0.7"
     }
 }

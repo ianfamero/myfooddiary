@@ -11,6 +11,31 @@
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
+Route::get('/', 'LoginController@index')->name('login');
+Route::post('/register', 'RegisterController@register');
+Route::post('/login', 'Auth\LoginController@login');
+Route::get('/logout', 'Auth\LoginController@logout');
+
+Route::group(['middleware' => ['auth:web']], function() {
+    
+    //PROFILE
+    Route::get('/profile/get-datas', 'ProfileController@getDatas');
+    Route::post('/profile/save', 'ProfileController@save');
+
+    //FOOD LIST
+    Route::get('/food-list/get-datas', 'FoodListController@getDatas');
+    Route::post('/food-list/new', 'FoodListController@store');
+    Route::post('/food-list/edit/{id}', 'FoodListController@update');
+    Route::get('/food-list/destroy/{id}', 'FoodListController@destroy');
+    Route::post('/food-list/destroy-selected', 'FoodListController@destroySelected');
+
+    //FOOD DIARY
+    Route::post('/food-diary/get-datas', 'FoodDiaryController@getDatas');
+    Route::post('/food-diary/add', 'FoodDiaryController@add');
+    Route::get('/food-diary/destroy/{id}', 'FoodDiaryController@destroy');
+
+    //REPORTS
+    Route::post('/report/generate', 'ReportController@generate');
+
+    Route::get('/{any}', 'RouterController@index')->where('any', '.*');
 });

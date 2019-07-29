@@ -1,14 +1,59 @@
-
-// Fonts
 @import url('https://fonts.googleapis.com/css?family=Nunito');
 
-// Variables
-@import 'variables';
+body {
+  margin: 0;
+  font-family: 'Nunito', sans-serif;
+  background: #fafafa;
+}
+$base-color: #0078CC;
+$base-color-darker: rgb(0, 81, 139);
+.el-header {
+  padding: 0px !important;
+  background: $base-color;
+  .el-icon-arrow-down {
+    color: white;
+  }
+  .el-menu--popup {
+    background:  $base-color !important;
+  }
+  .el-menu--horizontal {
+    position: absolute;
+    right: 0;
+    .el-menu-item, .el-submenu div {
+      background: $base-color !important;
+      color: #fff !important;
+      &:hover {
+        background: $base-color-darker !important;
+      }
+    }
+  }
+  .el-menu--horizontal>.el-menu-item.is-active, .el-menu--horizontal>.el-submenu.is-active .el-submenu__title {
+    background: $base-color-darker !important;
+    border: none !important;
+  }
+}
 
-// Bootstrap
-@import '~bootstrap/scss/bootstrap';
+@media only screen and (max-width: 800px) {
+  .fw-modal {
+    width:90% !important;
+  }
+}
 
-.navbar-laravel {
-  background-color: #fff;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.04);
+.table-header {
+  background: #f3f3f3;
+  border-top: 1px solid #e3e3e3;
+  border-left: 1px solid #e3e3e3;
+  border-right: 1px solid #e3e3e3;
+  padding: 5px;
+  height: 30px;
+}
+.table-pagination {
+  width: 100%;
+  text-align: center;
+  padding: 5px;
+}
+
+/* HELPERS */
+.mb-15 {
+  margin-bottom: 15px;
 }
