@@ -28,6 +28,9 @@ Route::group(['middleware' => ['auth:web']], function() {
     Route::post('/food-list/edit/{id}', 'FoodListController@update');
     Route::get('/food-list/destroy/{id}', 'FoodListController@destroy');
     Route::post('/food-list/destroy-selected', 'FoodListController@destroySelected');
+    Route::post('/food-list/nutritionix/search', 'NutritionixController@search');
+    Route::post('/food-list/nutritionix/new', 'NutritionixController@store');
+
 
     //FOOD DIARY
     Route::post('/food-diary/get-datas', 'FoodDiaryController@getDatas');
