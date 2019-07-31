@@ -5,7 +5,7 @@
         <el-card>
           <el-row class="mb-15">
             <el-button type="primary" size="mini" @click="showModal('')" :disabled="isProcessing"> New</el-button>&nbsp;&nbsp;or
-            <el-button type="primary" size="mini" @click="showNutritionixModal()" :disabled="isProcessing">Search Nutritionix</el-button>
+            <el-button type="primary" size="mini" @click="showExternalFoodDatabasesModal()" :disabled="isProcessing">Search External Food Databases</el-button>
             <el-button type="danger" size="mini" @click="toDestroy('', 'selected', true)" :disabled="multipleSelection.length == 0 || isProcessing"> Delete</el-button>
           </el-row>
           <el-row>
@@ -78,7 +78,7 @@
         </el-card>
       </el-col>
     </el-row>
-    <food-list-nutritionix-modal ref="nutritionix"></food-list-nutritionix-modal>
+    <food-list-external-food-databases-modal ref="external"></food-list-external-food-databases-modal>
     <food-list-form-modal ref="foodlist"></food-list-form-modal>
   </div>
 </template>
@@ -203,8 +203,8 @@
       showModal: function(data) {
         this.$refs.foodlist.showModal(data);
       },
-      showNutritionixModal: function() {
-        this.$refs.nutritionix.showModal();
+      showExternalFoodDatabasesModal: function() {
+        this.$refs.external.showModal();
       },
     }
   }

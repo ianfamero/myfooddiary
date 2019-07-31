@@ -33,7 +33,7 @@ Vue.component('user-login', require('./components/Login.vue'));
 Vue.component('top-header', require('./components/common/Header.vue'));
 Vue.component('login-header', require('./components/common/LoginHeader.vue'));
 Vue.component('food-list-form-modal', require('./components/food-list/Form.vue'));
-Vue.component('food-list-nutritionix-modal', require('./components/food-list/Nutritionix.vue'));
+Vue.component('food-list-external-food-databases-modal', require('./components/food-list/ExternalFoodDatabases.vue'));
 // Vue.component('food-diary', require('./components/food-diary/Index.vue'));
 // Vue.component('food-list', require('./components/food-list/Index.vue'));
 // Vue.component('profile', require('./components/profile/Index.vue'));
