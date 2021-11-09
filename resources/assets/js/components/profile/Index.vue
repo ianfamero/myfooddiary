@@ -29,10 +29,18 @@
                   <el-input type="text" v-model="formData.weight"></el-input>
                 </el-form-item>
               </el-col>
-              <el-col :span="24">
+              <el-col :span="12">
                 <el-form-item label="Activity" required :error="formError.activity_id">
                   <el-select v-model="formData.activity_id" placeholder="Select" filterable style="width: 100%">
                     <el-option v-for="act in activity" :key="act.id" :label="act.activity" :value="act.id">
+                    </el-option>
+                  </el-select>
+                </el-form-item>
+              </el-col>
+              <el-col :span="12">
+                <el-form-item label="Diet Type" required :error="formError.diet_type_id">
+                  <el-select v-model="formData.diet_type_id" placeholder="Select" filterable style="width: 100%">
+                    <el-option v-for="diet_type in diet_types" :key="diet_type.id" :label="diet_type.diet" :value="diet_type.id">
                     </el-option>
                   </el-select>
                 </el-form-item>
@@ -47,27 +55,22 @@
       <el-col :xs="24" :sm="12">
         <el-card v-loading="isProcessing" element-loading-text="Loading ...">
           <h2>Summary</h2>
-          <!-- <p>BMR: <b>{{ formData.bmr }}</b></p>
-          <p>Maintain Weight: <b>{{ formData.maintain_weight }}</b></p>
-          <p>Lose Weight: <b>{{ formData.lose_weight }}</b></p>
-          <p>Lose Weight Fast: <b>{{ formData.lose_weight_fast }}</b></p> -->
-
           <el-table :data="summaryData" style="width: 100%">
             <el-table-column prop="target" label="Target" min-width="130"> </el-table-column>
             <el-table-column prop="calories" label="Calories" min-width="100"> </el-table-column>
-            <el-table-column prop="carb" label="50% Carbs (g)" min-width="100">
+            <el-table-column prop="carb" label="Carbs (g)" min-width="100">
               <template slot-scope="scope">
                 {{ scope.row.carb + ' g' }}
               </template>
             </el-table-column>
-            <el-table-column prop="protein" label="30% Protein (g)" min-width="110"> 
-              <template slot-scope="scope">
-                {{ scope.row.protein + ' g' }}
-              </template>
-            </el-table-column>
-            <el-table-column prop="fat" label="20% Fat (g)" min-width="100">
+            <el-table-column prop="fat" label="Fat (g)" min-width="100">
               <template slot-scope="scope">
                 {{ scope.row.fat + ' g' }}
+              </template>
+            </el-table-column>
+             <el-table-column prop="protein" label="Protein (g)" min-width="110"> 
+              <template slot-scope="scope">
+                {{ scope.row.protein + ' g' }}
               </template>
             </el-table-column>
           </el-table>
@@ -104,6 +107,7 @@
           weight: '',
           height: '',
           activity_id: '',
+          diet_type_id: '',
         }
       },
       getDatas: function() {
@@ -113,20 +117,10 @@
           this.isProcessing = false;
           this.genders = response.data.genders;
           this.activity = response.data.activity;
+          this.diet_types = response.data.diet_types;
           this.formData = response.data.profile[0].profile;
           this.userData = response.data.profile[0];
           this.summaryData = response.data.summary;
-
-          var maintain = this.formData.maintain_weight;
-          var lose = this.formData.lose_weight;
-          var lose_fast = this.formData.lose_weight_fast;
-
-          var maintain_fat_grams = (maintain * 0.20) / 9;
-          var maintain_carb_grams = (maintain * 0.50) / 4;
-          var maintain_protein_grams = (maintain * 0.30) / 4;
-
-
-
         }).catch(error => {
           this.isProcessing = false;
         });

@@ -17,7 +17,7 @@
                   <el-input v-model="loginFormData.email"></el-input>
                 </el-form-item>
                 <el-form-item label="Password" :error="loginFormError.password">
-                  <el-input v-model="loginFormData.password" type="password"></el-input>
+                  <el-input v-on:keyup.enter.native="submitLoginForm" v-model="loginFormData.password" type="password"></el-input>
                 </el-form-item>
                 <el-form-item>
                   <el-button type="primary" @click="submitLoginForm">Login</el-button>
@@ -36,7 +36,7 @@
                   <el-input type="text" v-model="registerFormData.username"></el-input>
                 </el-form-item>
                 <el-form-item label="Password" required :error="registerFormError.password">
-                  <el-input type="password" v-model="registerFormData.password"></el-input>
+                  <el-input v-on:keyup.enter.native="submitLoginForm" type="password" v-model="registerFormData.password"></el-input>
                 </el-form-item>
                 <!-- <el-form-item>
                   <el-checkbox v-model="iAccept" @change="onAccept">I accept the <a href="#">Terms of Service</a></el-checkbox>
