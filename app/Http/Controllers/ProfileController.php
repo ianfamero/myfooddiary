@@ -7,6 +7,7 @@ use App\Gender;
 use App\Activity;
 use App\Profile;
 use App\User;
+use App\DietType;
 use Auth;
 
 use App\Http\Requests\ProfileRequest;
@@ -18,30 +19,43 @@ class ProfileController extends Controller
       $user = Auth::user();
       $genders = Gender::all();
       $activity = Activity::all();
-      $profile = User::with('profile')->where('profile_id', $user['profile_id'])->get();
+      $diet_types = DietType::all();
+      $profile = User::with('profile','profile.diet')->where('profile_id', $user['profile_id'])->get();
+      
+      if($profile[0]->profile->diet_type_id != 0) {
+        $percent_carbs = $profile[0]->profile->diet->percent_carbs / 100;
+        $percent_fats = $profile[0]->profile->diet->percent_fats / 100;
+        $percent_proteins = $profile[0]->profile->diet->percent_proteins / 100;
+      } else {
+        $percent_carbs = 0;
+        $percent_fats = 0;
+        $percent_proteins = 0;
+      }
       $summary[0] = [
-        "target" => "Maintain Weight",
-        "calories" => $profile[0]->profile->maintain_weight, 
-        "carb" => round(($profile[0]->profile->maintain_weight * 0.50) / 4), 
-        "protein" => round(($profile[0]->profile->maintain_weight * 0.30) / 4), 
-        "fat" => round(($profile[0]->profile->maintain_weight * 0.20) / 9), 
+        "target" => "Lose Weight Fast",
+        "calories" => $profile[0]->profile->lose_weight_fast, 
+        "carb" => round(($profile[0]->profile->lose_weight_fast * $percent_carbs) / 4), 
+        "protein" => round(($profile[0]->profile->lose_weight_fast * $percent_proteins) / 4), 
+        "fat" => round(($profile[0]->profile->lose_weight_fast * $percent_fats) / 9), 
       ];
       $summary[1] = [
         "target" => "Lose Weight",
         "calories" => $profile[0]->profile->lose_weight, 
-        "carb" => round(($profile[0]->profile->lose_weight * 0.50) / 4), 
-        "protein" => round(($profile[0]->profile->lose_weight * 0.30) / 4), 
-        "fat" => round(($profile[0]->profile->lose_weight * 0.20) / 9), 
+        "carb" => round(($profile[0]->profile->lose_weight * $percent_carbs) / 4), 
+        "protein" => round(($profile[0]->profile->lose_weight * $percent_proteins) / 4), 
+        "fat" => round(($profile[0]->profile->lose_weight * $percent_fats) / 9), 
       ];
       $summary[2] = [
-        "target" => "Lose Weight Fast",
-        "calories" => $profile[0]->profile->lose_weight_fast, 
-        "carb" => round(($profile[0]->profile->lose_weight_fast * 0.50) / 4), 
-        "protein" => round(($profile[0]->profile->lose_weight_fast * 0.30) / 4), 
-        "fat" => round(($profile[0]->profile->lose_weight_fast * 0.20) / 9), 
+        "target" => "Maintain Weight",
+        "calories" => $profile[0]->profile->maintain_weight, 
+        "carb" => round(($profile[0]->profile->maintain_weight * $percent_carbs) / 4), 
+        "protein" => round(($profile[0]->profile->maintain_weight * $percent_proteins) / 4), 
+        "fat" => round(($profile[0]->profile->maintain_weight * $percent_fats) / 9), 
       ];
+      
+      
 
-      return compact('genders', 'activity', 'profile', 'summary');
+      return compact('genders', 'activity', 'profile', 'summary', 'diet_types');
     }
     catch(\Exception $ex) {
       return response(['message' => $ex->getMessage()], 500);

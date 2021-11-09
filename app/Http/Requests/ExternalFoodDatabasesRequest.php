@@ -6,7 +6,7 @@ use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Contracts\Validation\Validator;
 use Illuminate\Http\Exceptions\HttpResponseException;
 
-class ProfileRequest extends FormRequest
+class ExternalFoodDatabasesRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -26,12 +26,14 @@ class ProfileRequest extends FormRequest
     public function rules()
     {
         return [
-            'gender_id' => 'required',  
-            'age' => 'required|integer',
-            'height' => 'required|integer',
-            'weight' => 'required|integer',
-            'activity_id' => 'required',  
-            'diet_type_id' => 'required',  
+            'food_database' => 'required',
+        ];
+    }
+
+    public function attributes()
+    {
+        return [
+            'food_database' => 'food database',
         ];
     }
 

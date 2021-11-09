@@ -21,8 +21,6 @@ class FoodDiaryController extends Controller
       $data = $request->all();
       $meal_types = MealType::all();
       $food_list = FoodList::where('profile_id', $user['profile_id'])->get();
-
-     
       
       $breakfast = UserFoodIntake::with('mealType','foodList')
       ->where('date', $data['date'])
@@ -72,7 +70,7 @@ class FoodDiaryController extends Controller
       ->where('a.profile_id', $user['profile_id'])
       ->sum('protein');
 
-      $profile = Profile::where('id', $user['profile_id'])->get();
+      $profile = Profile::with('diet')->where('id', $user['profile_id'])->get();
 
       $food_intake = array($breakfast, $lunch, $dinner, $snack);
       return compact(

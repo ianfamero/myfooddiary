@@ -4,7 +4,8 @@
       <el-col :span="24">
         <el-card>
           <el-row class="mb-15">
-            <el-button type="primary" size="mini" @click="showModal('')" :disabled="isProcessing"> New</el-button>
+            <el-button type="primary" size="mini" @click="showModal('')" :disabled="isProcessing"> New</el-button>&nbsp;&nbsp;or
+            <el-button type="primary" size="mini" @click="showExternalFoodDatabasesModal()" :disabled="isProcessing">Search External Food Databases</el-button>
             <el-button type="danger" size="mini" @click="toDestroy('', 'selected', true)" :disabled="multipleSelection.length == 0 || isProcessing"> Delete</el-button>
           </el-row>
           <el-row>
@@ -26,7 +27,7 @@
             </div>
             <el-row class="mb-15">
               <el-table :data="paginatedFoodList" border stripe empty-text="No Data Found" v-loading="isProcessing" 
-              @sort-change="handleSortChange" :default-sort="{prop: 'food', order: 'ascending'}" element-loading-text="Loading ..." @selection-change="handleSelectionChange" style="width: 100%">
+                @sort-change="handleSortChange" :default-sort="{prop: 'food', order: 'ascending'}" element-loading-text="Loading ..." @selection-change="handleSelectionChange" style="width: 100%">
                 <el-table-column sortable type="selection" width="45"></el-table-column>
                 <el-table-column sortable prop="food" label="Food" min-width="250"></el-table-column>
                 <el-table-column sortable prop="serving_size" label="Serving Size" width="120"></el-table-column>
@@ -77,6 +78,7 @@
         </el-card>
       </el-col>
     </el-row>
+    <food-list-external-food-databases-modal ref="external"></food-list-external-food-databases-modal>
     <food-list-form-modal ref="foodlist"></food-list-form-modal>
   </div>
 </template>
@@ -200,6 +202,9 @@
       },
       showModal: function(data) {
         this.$refs.foodlist.showModal(data);
+      },
+      showExternalFoodDatabasesModal: function() {
+        this.$refs.external.showModal();
       },
     }
   }
